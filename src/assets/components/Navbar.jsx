@@ -1,32 +1,22 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext } from 'react';
+import Logo from '../Images/marathon-logo2.png'
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 import UsrsPic from '../Images/user-profile-icon-free-vector.png'
-import logo from '../Images/marathon-logo2.png'
-// { isLoggedIn, user, handleLogout }
-const Navbar = ({ isLoggedIn, user, handleLogout }) => {
-    const userLoginLink = <>
-        <li><NavLink to='/register'>Register</NavLink> </li>
-        <li><NavLink to='/login'>Login</NavLink> </li>
-    </>
+
+const Navbar = () => {
+    const { user, Logout } = useContext(AuthContext)
     const Links = <>
         <li><NavLink to='/'>Home</NavLink> </li>
-        <li><NavLink to='/marathons'>Marathons</NavLink> </li>
+        <li><NavLink to='/donation-campaigns'>Donation Campaigns</NavLink> </li>
+        <li><NavLink to='/help'>How to Help</NavLink> </li>
+
         {
             user && <>
-
+                <li><NavLink to='/dashboard'>Dashboard</NavLink> </li>
             </>
         }
-
     </>
-
-    const handleSignOut = () => {
-        signOutUser()
-            .then(() => {
-                console.log('users sign out successfully')
-                navigate('/login')
-            })
-            .catch(error => console.log('ERROR', error.massage))
-    }
 
     return (
         <div className="navbar sticky top-0 z-50 bg-base-200 bg-opacity-90 ">
@@ -52,16 +42,14 @@ const Navbar = ({ isLoggedIn, user, handleLogout }) => {
                         {Links}
                     </ul>
                 </div>
-                <NavLink to='/'> <img className='w-28 h-20' src={logo} alt="" /></NavLink>
+                <NavLink to='/'> <img className='w-20 h-20' src={Logo} alt="" /></NavLink>
             </div>
-            <div className="navbar-center hidden lg:flex ">
+            <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {Links}
                 </ul>
             </div>
             <div className="navbar-end gap-4">
-                <div className="hidden md:block">
-                </div>
                 <div>
                     {user && user?.displayName
                     }
@@ -72,7 +60,7 @@ const Navbar = ({ isLoggedIn, user, handleLogout }) => {
                             <div className="w-10 h-10 border rounded-full border-sky-500 ">
                                 <div className="rounded-full ">
                                     {
-                                        user && user?.photoURL ? (<img className="rounded-full w-10 h-10" src={user.photoURL} alt="" />) : (<img className="rounded-full w-10 h-10" src={UsrsPic} alt="" />)
+                                        user && user?.photoURL ? (<img className="rounded-full w-10 h-10" src={user.photoURL} alt="" />):(<img className="rounded-full w-10 h-10" src={UsrsPic} alt="" />)
                                     }
                                 </div>
                             </div>
@@ -87,19 +75,19 @@ const Navbar = ({ isLoggedIn, user, handleLogout }) => {
                                 </Link>
                             </li>
                             <li>{user && user.email}</li>
-                            <button onClick={handleLogout} className='btn btn-sm'>LogOut</button>
+                            <button onClick={Logout} className='btn btn-sm'>LogOut</button>
                         </ul>
                     </div>) :
-                        (<div className="dropdown dropdown-end flex items-center gap-1">
-                            <ul className="menu menu-horizontal px-1 border">
-                                {userLoginLink}
-                            </ul>
+                        (<div className="dropdown dropdown-end flex items-center gap-4">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                     <img
                                         alt="Tailwind CSS Navbar component"
                                         src={UsrsPic} />
                                 </div>
+                            </div>
+                            <div>
+                                <NavLink to='/login'><a className="btn btn-neutral">Login</a></NavLink>
                             </div>
                         </div>)
                 }

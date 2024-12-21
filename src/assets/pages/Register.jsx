@@ -6,7 +6,7 @@ import { AuthContext } from '../Provider/AuthProvider';
 
 const Register = () => {
 
-    // const { crateNewUser, setUser, UpdateUserProfile } = useContext(AuthContext)
+    const { crateNewUser, setUser, UpdateUserProfile } = useContext(AuthContext)
     const [error, setError] = useState({})
     const [ErrorPass, setErrorPass] = useState({})
     const [show, setShow] = useState(false)
@@ -41,33 +41,33 @@ const Register = () => {
         } else {
             setErrorPass({ ...ErrorPass, password: "" });
         }
-        // if (hasError) return;
+        if (hasError) return;
 
-        // // API Call
-        // crateNewUser(email, Password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user);
-        //         setUser(user);
-        //         UpdateUserProfile({ displayName: name, photoURL: photoUrl })
-        //             .then(() => {
-        //                 navigate("/", { state: { successMessage: "Successfully registered!" } });
-        //             })
-        //             .catch(err => {
-        //                 console.log(err);
-        //             });
-        //         // alert('Successfully registered');
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
+        // API Call
+        crateNewUser(email, Password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setUser(user);
+                UpdateUserProfile({ displayName: name, photoURL: photoUrl })
+                    .then(() => {
+                        navigate("/", { state: { successMessage: "Successfully registered!" } });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+                // alert('Successfully registered');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
 
-        //         if (errorCode === 'auth/email-already-in-use') {
-        //             setError({ ...error, email: "This email is already in use. Please try logging in." });
-        //         } else {
-        //             console.log(errorMessage);
-        //         }
-        //     });
+                if (errorCode === 'auth/email-already-in-use') {
+                    setError({ ...error, email: "This email is already in use. Please try logging in." });
+                } else {
+                    console.log(errorMessage);
+                }
+            });
     };
 
 
