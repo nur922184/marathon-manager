@@ -5,9 +5,10 @@ import MarathonDetails from "../pages/MarathonDetails";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Marathon from "../pages/Marathon";
-import Dashboard from "../pages/Dashboard";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddMarathon from "../Dashboard/AddMarathon";
+import MyMarathonList from "../Dashboard/MyMarathonList";
+import MyApplyList from "../Dashboard/MyApplyList";
 
 
 
@@ -48,6 +49,14 @@ const Router = createBrowserRouter([
           {
             path: "/dashboard/add-marathon",
             element: <AddMarathon></AddMarathon>,
+          },
+          {
+            path: "/dashboard/my-marathon-list",
+            element: <MyMarathonList></MyMarathonList>,
+          },
+          {
+            path: "/dashboard/my-apply-list",
+            element: <MyApplyList></MyApplyList>,
           },
         ]
       },
