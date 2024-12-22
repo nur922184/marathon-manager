@@ -1,70 +1,13 @@
 import React from "react";
+import Swiper from "../components/Swiper";
 
 const Home = () => {
   return (
     <div>
       {/* Banner Section */}
-      <section className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto">
-          <div className="carousel w-full">
-            {/* Slide 1 */}
-            <div id="slide1" className="carousel-item relative w-full">
-              <img
-                src="https://via.placeholder.com/1200x400"
-                className="w-full"
-                alt="Marathon Highlight 1"
-              />
-              <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
-                <h2 className="text-4xl font-bold text-white">
-                  Join the Marathon Today!
-                </h2>
-              </div>
-              <a href="#slide3" className="btn btn-circle absolute left-5 top-1/2">
-                ❮
-              </a>
-              <a href="#slide2" className="btn btn-circle absolute right-5 top-1/2">
-                ❯
-              </a>
-            </div>
-            {/* Slide 2 */}
-            <div id="slide2" className="carousel-item relative w-full">
-              <img
-                src="https://via.placeholder.com/1200x400"
-                className="w-full"
-                alt="Marathon Highlight 2"
-              />
-              <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
-                <h2 className="text-4xl font-bold text-white">
-                  Run for a Cause, Run for Health
-                </h2>
-              </div>
-              <a href="#slide1" className="btn btn-circle absolute left-5 top-1/2">
-                ❮
-              </a>
-              <a href="#slide3" className="btn btn-circle absolute right-5 top-1/2">
-                ❯
-              </a>
-            </div>
-            {/* Slide 3 */}
-            <div id="slide3" className="carousel-item relative w-full">
-              <img
-                src="https://via.placeholder.com/1200x400"
-                className="w-full"
-                alt="Marathon Highlight 3"
-              />
-              <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
-                <h2 className="text-4xl font-bold text-white">
-                  Be Part of the Change
-                </h2>
-              </div>
-              <a href="#slide2" className="btn btn-circle absolute left-5 top-1/2">
-                ❮
-              </a>
-              <a href="#slide1" className="btn btn-circle absolute right-5 top-1/2">
-                ❯
-              </a>
-            </div>
-          </div>
+      <section className="bg-gray-900 text-white">
+        <div className="">
+            <Swiper></Swiper>
         </div>
       </section>
 
