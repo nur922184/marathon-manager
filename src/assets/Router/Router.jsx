@@ -23,7 +23,7 @@ const Router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/marathons-details",
+        path: "/marathons/:id",
         element: <MarathonDetails></MarathonDetails>,
       },
       {

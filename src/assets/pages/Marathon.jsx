@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Marathon = () => {
   const [marathons, setMarathons] = useState([]);
@@ -47,7 +48,9 @@ const Marathon = () => {
                   Registration Dates: {new Date(marathon.startRegistrationDate).toLocaleDateString()} -{" "}
                   {new Date(marathon.endRegistrationDate).toLocaleDateString()}
                 </p>
-                <button className="mt-4 btn btn-primary w-full">See Details</button>
+                <Link to={`/marathons/${marathon._id}`}>
+                  <button className="mt-4 btn btn-primary w-full">See Details</button>
+                </Link>
               </div>
             </div>
           ))}

@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const MyApplyList = () => {
-  const { user } = useContext(AuthContext)
-  const email = user.email; 
-  const [appliedMarathons, setAppliedMarathons] = useState([]);
+  const { user } = useContext(AuthContext);
+  const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedApplication, setSelectedApplication] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
-  // Fetch logged-in user's email (assuming stored in localStorage)
-  // const email = localStorage.getItem("userEmail");
+  const email = user?.email;
 
-  // Fetch applied marathons for the logged-in user
   useEffect(() => {
     const fetchApplications = async () => {
       try {
@@ -21,20 +20,17 @@ const MyApplyList = () => {
           return;
         }
 
-        // API call with email as a query parameter
-        const response = await fetch(
-          `http://localhost:5000/applications?email=${email}`
-        );
+        const response = await fetch(`http://localhost:5000/applications?email=${email}`);
         const data = await response.json();
 
         if (response.ok) {
-          setAppliedMarathons(data);
+          setApplications(data);
         } else {
           throw new Error(data.message || "Failed to fetch applications.");
         }
       } catch (error) {
         console.error("Error fetching applications:", error);
-        toast.error("Failed to load applied marathons.");
+        toast.error("Failed to load applications.");
       } finally {
         setLoading(false);
       }
@@ -43,51 +39,28 @@ const MyApplyList = () => {
     fetchApplications();
   }, [email]);
 
-  // Handle delete application
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this application?"
-    );
-    if (!confirmDelete) return;
-
-    try {
-      await fetch(`http://localhost:5000/applications/${id}`, {
-        method: "DELETE",
-      });
-
-      setAppliedMarathons(
-        appliedMarathons.filter((application) => application._id !== id)
-      );
-      toast.success("Application deleted successfully.");
-    } catch (error) {
-      console.error("Error deleting application:", error);
-      toast.error("Failed to delete application.");
-    }
+  const handleEdit = (application) => {
+    setSelectedApplication(application);
+    setIsEditing(true);
   };
 
-  // Handle update application
-  const handleUpdate = async (updatedApplication) => {
+  const handleUpdate = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/applications/${updatedApplication._id}`,
+        `http://localhost:5000/applications/${selectedApplication._id}`,
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedApplication),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(selectedApplication),
         }
       );
 
       if (response.ok) {
-        const updatedData = await response.json();
-        setAppliedMarathons((prev) =>
-          prev.map((application) =>
-            application._id === updatedApplication._id
-              ? updatedData
-              : application
-          )
+        const updatedApplications = applications.map((app) =>
+          app._id === selectedApplication._id ? selectedApplication : app
         );
+        setApplications(updatedApplications);
+        setIsEditing(false);
         toast.success("Application updated successfully.");
       } else {
         throw new Error("Failed to update application.");
@@ -99,110 +72,75 @@ const MyApplyList = () => {
   };
 
   if (loading) {
-    return <div className="text-center mt-8">Loading applications...</div>;
+    return <span className="loading loading-bars justify-center loading-lg"></span>;
   }
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">My Applied Marathons</h2>
-      {appliedMarathons.length === 0 ? (
+      <h2 className="text-2xl font-bold mb-6">My Application List</h2>
+      {applications.length === 0 ? (
         <div>No applications found.</div>
       ) : (
-        <table className="table-auto w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border border-gray-300 px-4 py-2">Title</th>
-              <th className="border border-gray-300 px-4 py-2">Start Date</th>
-              <th className="border border-gray-300 px-4 py-2">Contact</th>
-              <th className="border border-gray-300 px-4 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appliedMarathons.map((application) => (
-              <tr key={application._id} className="hover:bg-gray-100">
-                <td className="border border-gray-300 px-4 py-2">
-                  {application.marathonTitle}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {new Date(application.marathonStartDate).toLocaleDateString()}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {application.contactNumber}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <button
-                    className="btn btn-info btn-sm mr-2"
-                    onClick={() => setSelectedApplication(application)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="btn btn-error btn-sm"
-                    onClick={() => handleDelete(application._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      {/* Update Modal */}
-      {selectedApplication && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg max-w-lg w-full">
-            <h3 className="text-xl font-bold mb-4">Update Application</h3>
-            <input
-              type="text"
-              value={selectedApplication.firstName}
-              onChange={(e) =>
-                setSelectedApplication({
-                  ...selectedApplication,
-                  firstName: e.target.value,
-                })
-              }
-              className="input input-bordered w-full mb-4"
-            />
-            <input
-              type="text"
-              value={selectedApplication.lastName}
-              onChange={(e) =>
-                setSelectedApplication({
-                  ...selectedApplication,
-                  lastName: e.target.value,
-                })
-              }
-              className="input input-bordered w-full mb-4"
-            />
-            <input
-              type="text"
-              value={selectedApplication.contactNumber}
-              onChange={(e) =>
-                setSelectedApplication({
-                  ...selectedApplication,
-                  contactNumber: e.target.value,
-                })
-              }
-              className="input input-bordered w-full mb-4"
-            />
-            <button
-              className="btn btn-primary mr-2"
-              onClick={() => {
-                handleUpdate(selectedApplication);
-                setSelectedApplication(null);
-              }}
-            >
-              Save
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => setSelectedApplication(null)}
-            >
-              Cancel
-            </button>
-          </div>
+        <div>
+          {isEditing ? (
+            <div className="p-4 border rounded bg-gray-100">
+              <h3 className="text-lg font-bold mb-2">Edit Application</h3>
+              <input
+                type="text"
+                value={selectedApplication?.status || ""}
+                onChange={(e) =>
+                  setSelectedApplication({
+                    ...selectedApplication,
+                    status: e.target.value,
+                  })
+                }
+                placeholder="Update status"
+                className="input input-bordered mb-4"
+              />
+              <button
+                className="btn btn-success mr-2"
+                onClick={handleUpdate}
+              >
+                Save
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => setIsEditing(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <table className="table-auto w-full border-collapse border border-gray-300">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="border border-gray-300 px-4 py-2">Marathon Title</th>
+                  <th className="border border-gray-300 px-4 py-2">Status</th>
+                  <th className="border border-gray-300 px-4 py-2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {applications.map((application) => (
+                  <tr key={application._id} className="hover:bg-gray-100">
+                    <td className="border border-gray-300 px-4 py-2">
+                      {application.title}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {application.status || "Pending"}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      <button
+                        className="btn btn-info btn-sm"
+                        onClick={() => handleEdit(application)}
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       )}
     </div>
