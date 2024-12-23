@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const MyMarathonList = () => {
   const { user } = useContext(AuthContext); // Context থেকে ব্যবহারকারীর তথ্য পাওয়া
@@ -41,55 +42,104 @@ const MyMarathonList = () => {
   }, [user?.email]);
 
   // Handle delete marathon
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this marathon?"
-    );
-    if (!confirmDelete) return;
 
+
+  const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/marathons/${id}`, {
-        method: "DELETE",
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
       });
 
-      setMarathons(marathons.filter((marathon) => marathon._id !== id));
-      toast.success("Marathon deleted successfully.");
+      if (result.isConfirmed) {
+        // Proceed with delete request
+        const response = await fetch(`http://localhost:5000/marathons/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          setMarathons(marathons.filter((marathon) => marathon._id !== id));
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your marathon has been deleted.",
+            icon: "success",
+          });
+        } else {
+          throw new Error("Failed to delete marathon.");
+        }
+      }
     } catch (error) {
       console.error("Error deleting marathon:", error);
-      toast.error("Failed to delete marathon.");
+      Swal.fire({
+        title: "Error",
+        text: "Failed to delete marathon. Please try again.",
+        icon: "error",
+      });
     }
   };
+
 
   // Handle update marathon
   const handleUpdate = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/marathons/${selectedMarathon._id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(selectedMarathon),
-        }
-      );
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to update the marathon details?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, update it!",
+      });
 
-      if (response.ok) {
-        const updatedMarathons = marathons.map((marathon) =>
-          marathon._id === selectedMarathon._id ? selectedMarathon : marathon
+      if (result.isConfirmed) {
+        const response = await fetch(
+          `http://localhost:5000/marathons/${selectedMarathon._id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(selectedMarathon),
+          }
         );
-        setMarathons(updatedMarathons);
-        setIsModalOpen(false);
-        toast.success("Marathon updated successfully.");
-      } else {
-        throw new Error("Failed to update marathon.");
+
+        if (response.ok) {
+          const updatedMarathons = marathons.map((marathon) =>
+            marathon._id === selectedMarathon._id ? selectedMarathon : marathon
+          );
+          setMarathons(updatedMarathons);
+          setIsModalOpen(false);
+
+          Swal.fire({
+            title: "Updated!",
+            text: "Marathon details have been updated successfully.",
+            icon: "success",
+          });
+        } else {
+          throw new Error("Failed to update marathon.");
+        }
       }
     } catch (error) {
       console.error("Error updating marathon:", error);
-      toast.error("Failed to update marathon.");
+      Swal.fire({
+        title: "Error",
+        text: "Failed to update marathon. Please try again.",
+        icon: "error",
+      });
     }
   };
 
+
   if (loading) {
-    return <span className="loading loading-bars justify-center loading-lg"></span>;
+    return <div className="flex flex-col justify-center items-center h-screen">
+      <span className="loading loading-bars loading-lg"></span>
+      <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
+    </div>
+      ;
   }
 
   return (

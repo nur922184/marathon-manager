@@ -23,7 +23,11 @@ const Marathon = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-12">Loading...</div>;
+    return <div className="flex flex-col justify-center items-center h-screen">
+      <span className="loading loading-bars loading-lg"></span>
+      <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
+    </div>
+      ;
   }
 
   return (

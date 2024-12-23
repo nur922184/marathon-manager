@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
- // Import AuthContext
-import { toast } from "react-toastify";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+
 
 const MarathonDetails = () => {
   const { id } = useParams(); // Get dynamic ID from the URL
   const { user } = useContext(AuthContext); // Get user info from context
+  const navigate = useNavigate(); // Initialize navigation hook
   const [marathon, setMarathon] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -19,6 +20,11 @@ const MarathonDetails = () => {
         setMarathon(data);
       } catch (error) {
         console.error("Error fetching marathon details:", error);
+        Swal.fire({
+          title: "Error",
+          text: "Failed to load marathon details. Please try again later.",
+          icon: "error",
+        });
       } finally {
         setLoading(false);
       }
@@ -29,7 +35,11 @@ const MarathonDetails = () => {
 
   const handleApply = async () => {
     if (!user?.email) {
-      toast.error("You need to log in to apply!");
+      Swal.fire({
+        title: "Error",
+        text: "You need to log in to apply!",
+        icon: "error",
+      });
       return;
     }
 
@@ -51,13 +61,27 @@ const MarathonDetails = () => {
       });
 
       if (response.ok) {
-        toast.success("Applied successfully!");
+        Swal.fire({
+          title: "Success",
+          text: "You have applied successfully!",
+          icon: "success",
+        }).then(() => {
+          navigate("/dashboard/my-apply-list"); // Navigate after success
+        });
       } else {
-        toast.error("Failed to apply. Please try again.");
+        Swal.fire({
+          title: "Error",
+          text: "Failed to apply. Please try again.",
+          icon: "error",
+        });
       }
     } catch (error) {
       console.error("Error applying:", error);
-      toast.error("An error occurred. Please try again.");
+      Swal.fire({
+        title: "Error",
+        text: "An error occurred. Please try again.",
+        icon: "error",
+      });
     }
   };
 

@@ -72,8 +72,12 @@ const MyApplyList = () => {
   };
 
   if (loading) {
-    return <span className="loading loading-bars justify-center loading-lg"></span>;
-  }
+    return <div className="flex flex-col justify-center items-center h-screen">
+    <span className="loading loading-bars loading-lg"></span>
+    <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
+  </div>
+    ;
+}
 
   return (
     <div className="p-6">

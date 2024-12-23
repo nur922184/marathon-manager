@@ -2,11 +2,15 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+
+import { useNavigate } from "react-router-dom";
 
 const AddMarathon = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate(); // Initialize the useNavigate hook
     const email = user.email;
-    console.log(email)
+    console.log(email);
     const [formData, setFormData] = useState({
         title: "",
         location: "",
@@ -23,9 +27,10 @@ const AddMarathon = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         // Basic validation
         if (
             !formData.title ||
@@ -36,14 +41,19 @@ const AddMarathon = () => {
             !formData.description ||
             !formData.image
         ) {
-            toast.error("Please fill out all fields");
+           Swal.fire({
+                title: "Error!",
+                text: "Please fill out all fields.",
+                icon: "error",
+                draggable: true,
+            });
             return;
         }
-    
+
         try {
             // Add email to form data
             const dataToSubmit = { ...formData, email };
-    
+
             // Send data to the server
             const response = await fetch("http://localhost:5000/marathons", {
                 method: "POST",
@@ -52,11 +62,11 @@ const AddMarathon = () => {
                 },
                 body: JSON.stringify(dataToSubmit),
             });
-    
+
             if (!response.ok) {
                 throw new Error("Failed to add marathon");
             }
-    
+
             // Reset form and show success message
             setFormData({
                 title: "",
@@ -68,14 +78,25 @@ const AddMarathon = () => {
                 description: "",
                 image: "",
             });
-            toast.success("Marathon added successfully!");
+
+           Swal.fire({
+                title: "Success!",
+                text: "Marathon added successfully.",
+                icon: "success",
+                draggable: true,
+            }).then(() => {
+                navigate("/marathons"); // Navigate to the desired route
+            });
         } catch (error) {
             console.error("Error submitting marathon:", error);
-            toast.error("Failed to add marathon. Please try again.");
+           Swal.fire({
+                title: "Error!",
+                text: "Failed to add marathon. Please try again.",
+                icon: "error",
+                draggable: true,
+            });
         }
     };
-    
-
 
     return (
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
