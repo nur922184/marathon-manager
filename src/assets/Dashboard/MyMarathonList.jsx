@@ -3,6 +3,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const MyMarathonList = () => {
   const { user } = useContext(AuthContext); // Context থেকে ব্যবহারকারীর তথ্য পাওয়া
@@ -171,22 +173,25 @@ const MyMarathonList = () => {
                     {new Date(marathon.startDate).toLocaleDateString()}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    <button
-                      className="btn btn-info btn-sm mr-2"
-                      onClick={() => {
-                        setSelectedMarathon(marathon);
-                        setIsModalOpen(true);
-                      }}
-                    >
-                      Update
-                    </button>
-                    <button
-                      className="btn btn-error btn-sm"
-                      onClick={() => handleDelete(marathon._id)}
-                    >
-                      Delete
-                    </button>
+                    <div className="flex items-center justify-center space-x-2">
+                      <button
+                        className="btn btn-info btn-sm"
+                        onClick={() => {
+                          setSelectedMarathon(marathon);
+                          setIsModalOpen(true);
+                        }}
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        className="btn btn-error btn-sm"
+                        onClick={() => handleDelete(marathon._id)}
+                      >
+                        <MdDelete />
+                      </button>
+                    </div>
                   </td>
+
                 </tr>
               ))}
             </tbody>

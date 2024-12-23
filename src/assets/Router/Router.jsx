@@ -9,6 +9,9 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AddMarathon from "../Dashboard/AddMarathon";
 import MyMarathonList from "../Dashboard/MyMarathonList";
 import MyApplyList from "../Dashboard/MyApplyList";
+import PrivatRoute from "./PrivatRoute";
+import UpdateProfile from "../pages/UpdateProfile";
+import ProfilePage from "../pages/ProfilePage";
 
 
 
@@ -24,7 +27,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/marathons/:id",
-        element: <MarathonDetails></MarathonDetails>,
+        element: <PrivatRoute><MarathonDetails></MarathonDetails></PrivatRoute>,
       },
       {
         path: "/marathons",
@@ -39,24 +42,32 @@ const Router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
+        path: "/profile",
+        element: <PrivatRoute><ProfilePage></ProfilePage></PrivatRoute>,
+      },
+      {
+        path: "/update-profile",
+        element: <PrivatRoute><UpdateProfile></UpdateProfile></PrivatRoute>,
+      },
+      {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivatRoute><DashboardLayout></DashboardLayout></PrivatRoute>,
         children: [
           {
             path: "/dashboard",
-            element: <AddMarathon></AddMarathon>,
+            element: <PrivatRoute><AddMarathon></AddMarathon></PrivatRoute>,
           },
           {
             path: "/dashboard/add-marathon",
-            element: <AddMarathon></AddMarathon>,
+            element: <PrivatRoute> <AddMarathon></AddMarathon></PrivatRoute>,
           },
           {
             path: "/dashboard/my-marathon-list",
-            element: <MyMarathonList></MyMarathonList>,
+            element: <PrivatRoute> <MyMarathonList></MyMarathonList></PrivatRoute>,
           },
           {
             path: "/dashboard/my-apply-list",
-            element: <MyApplyList></MyApplyList>,
+            element: <PrivatRoute> <MyApplyList></MyApplyList></PrivatRoute>,
           },
         ]
       },

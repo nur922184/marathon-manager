@@ -11,6 +11,14 @@ const MarathonDetails = () => {
   const [marathon, setMarathon] = useState(null);
   const [loading, setLoading] = useState(true);
 
+
+  const handleApplyDisabled = () => {
+    const currentDate = new Date();
+    const startDate = new Date(marathon.startRegistrationDate);
+    const endDate = new Date(marathon.endRegistrationDate);
+    return currentDate < startDate || currentDate > endDate;
+  };
+
   useEffect(() => {
     // Fetch the specific marathon details by ID
     const fetchMarathonDetails = async () => {
@@ -108,9 +116,15 @@ const MarathonDetails = () => {
         <p className="text-gray-700 mb-4">
           <strong>Description:</strong> {marathon.description}
         </p>
+        <p className="text-gray-600">
+          Registration Dates: {new Date(marathon.startRegistrationDate).toLocaleDateString()} -{" "}
+          {new Date(marathon.endRegistrationDate).toLocaleDateString()}
+        </p>
         <button
           onClick={handleApply}
-          className="btn btn-primary w-full mt-4"
+          disabled={handleApplyDisabled()} // Check if the button should be disabled
+          className={`btn btn-primary w-full mt-4 ${handleApplyDisabled() ? "opacity-50 cursor-not-allowed" : ""
+            }`}
         >
           Apply Now
         </button>

@@ -1,9 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import './Marathon.css'
 
 const Marathon = () => {
   const [marathons, setMarathons] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0)
+  // const { count } = useLoaderData();
+  // const count = 76
+  const [count, setCount] = useState(0)
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+
+  const pages = [...Array(numberOfPages).keys()]
+
+
+  const handleItemsParPages = e => {
+    const val = parseInt(e.target.value);
+    console.log(val)
+    setItemsPerPage(val);
+    setCurrentPage(0)
+
+  }
+
+  const handlePrevBtn = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const handleNextBtn = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  useEffect(() => {
+    fetch('http://localhost:5000/productsCount')
+      .then(res => res.json())
+      .then(data => setCount(data.count))
+  }, [])
+
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/marathons?page=${currentPage}&size=${itemsPerPage}`)
+      .then(res => res.json())
+      .then(data => setProducts(data))
+  }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
     // Fetch data from API
@@ -59,7 +103,28 @@ const Marathon = () => {
             </div>
           ))}
         </div>
+        {/* Pagination */}
+        <div className='pagination'>
+          <p>current pages {currentPage}</p>
+          <button onClick={handlePrevBtn}>Prev</button>
+          {
+            pages.map(page =>
+              <button
+                className={currentPage === page ? 'selected btn gap-4' : undefined}
+                onClick={() => setCurrentPage(page)}
+                key={page}>{page}
+              </button>)
+          }
+          <button onClick={handleNextBtn}>Next</button>
+          <select value={itemsPerPage} onChange={handleItemsParPages} name="" id="">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+        </div>
       </div>
+
     </section>
   );
 };
