@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const MyApplyList = () => {
   const { user } = useContext(AuthContext)
@@ -12,7 +14,7 @@ const MyApplyList = () => {
   // Fetch applications for logged-in user
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/applications?email=${user.email}`)
+      fetch(`https://asserment-eleven-server.vercel.app/applications?email=${user.email}`)
         .then((response) => response.json())
         .then((data) => setApplications(data))
         .catch((error) => console.error("Error fetching applications:", error));
@@ -31,7 +33,7 @@ const MyApplyList = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/applications/${id}`, {
+        fetch(`https://asserment-eleven-server.vercel.app/applications/${id}`, {
           method: "DELETE",
         })
           .then((response) => response.json())
@@ -50,7 +52,7 @@ const MyApplyList = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5000/applications/${selectedApplication._id}`, {
+    fetch(`https://asserment-eleven-server.vercel.app/applications/${selectedApplication._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),
@@ -108,18 +110,20 @@ const MyApplyList = () => {
               </td>
               <td className="border border-gray-300 px-4 py-2">{app.contactNumber}</td>
               <td className="border border-gray-300 px-4 py-2">
+                <div className="flex items-center justify-center space-x-2">
                 <button
                   className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
                   onClick={() => setSelectedApplication(app)}
                 >
-                  Update
+                   <FaEdit />
                 </button>
                 <button
                   className="bg-red-500 text-white px-2 py-1 rounded"
                   onClick={() => handleDelete(app._id)}
                 >
-                  Delete
+                 <MdDelete />
                 </button>
+                </div>
               </td>
             </tr>
           ))}

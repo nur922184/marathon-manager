@@ -89,41 +89,30 @@ const MyMarathonList = () => {
   // Handle update marathon
   const handleUpdate = async () => {
     try {
-      const result = await Swal.fire({
-        title: "Are you sure?",
-        text: "Do you want to update the marathon details?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, update it!",
-      });
-
-      if (result.isConfirmed) {
-        const response = await fetch(
-          `https://asserment-eleven-server.vercel.app/marathons/${selectedMarathon._id}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(selectedMarathon),
-          }
-        );
-
-        if (response.ok) {
-          const updatedMarathons = marathons.map((marathon) =>
-            marathon._id === selectedMarathon._id ? selectedMarathon : marathon
-          );
-          setMarathons(updatedMarathons);
-          setIsModalOpen(false);
-
-          Swal.fire({
-            title: "Updated!",
-            text: "Marathon details have been updated successfully.",
-            icon: "success",
-          });
-        } else {
-          throw new Error("Failed to update marathon.");
+      const { _id, ...updatedData } = selectedMarathon; // _id বাদ দিন
+      const response = await fetch(
+        `https://asserment-eleven-server.vercel.app/marathons/${_id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedData),
         }
+      );
+
+      if (response.ok) {
+        const updatedMarathons = marathons.map((marathon) =>
+          marathon._id === _id ? { ...marathon, ...updatedData } : marathon
+        );
+        setMarathons(updatedMarathons);
+        setIsModalOpen(false);
+
+        Swal.fire({
+          title: "Updated!",
+          text: "Marathon details have been updated successfully.",
+          icon: "success",
+        });
+      } else {
+        throw new Error("Failed to update marathon.");
       }
     } catch (error) {
       console.error("Error updating marathon:", error);
@@ -134,6 +123,7 @@ const MyMarathonList = () => {
       });
     }
   };
+
 
 
   if (loading) {
@@ -198,6 +188,7 @@ const MyMarathonList = () => {
           </table>
 
           {/* Update Modal */}
+          {/* Update Modal */}
           {isModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
               <div className="bg-white p-6 rounded shadow-lg w-96">
@@ -234,13 +225,29 @@ const MyMarathonList = () => {
                   <label className="block text-gray-700">Start Date:</label>
                   <input
                     type="date"
-                    value={new Date(selectedMarathon.startDate)
-                      .toISOString()
-                      .split("T")[0]}
+                    value={selectedMarathon.startDate ? selectedMarathon.startDate.split("T")[0] : ""}
                     onChange={(e) =>
                       setSelectedMarathon({
                         ...selectedMarathon,
-                        startDate: e.target.value,
+                        startDate: new Date(e.target.value).toISOString(),
+                      })
+                    }
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700">End Registration Date:</label>
+                  <input
+                    type="date"
+                    value={
+                      selectedMarathon.endRegistrationDate
+                        ? selectedMarathon.endRegistrationDate.split("T")[0]
+                        : ""
+                    }
+                    onChange={(e) =>
+                      setSelectedMarathon({
+                        ...selectedMarathon,
+                        endRegistrationDate: new Date(e.target.value).toISOString(),
                       })
                     }
                     className="input input-bordered w-full"

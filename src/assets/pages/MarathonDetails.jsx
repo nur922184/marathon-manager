@@ -13,10 +13,21 @@ const MarathonDetails = () => {
       .catch((error) => console.error('Error loading details:', error));
   }, [id]);
 
-  if (!marathon) return <div className="flex flex-col justify-center items-center h-screen">
-    <span className="loading loading-bars loading-lg"></span>
-    <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
-  </div>
+  if (!marathon)
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+        <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
+      </div>
+    );
+
+  // Get current date
+  const currentDate = new Date();
+  const startRegistrationDate = new Date(marathon.startRegistrationDate);
+  const endRegistrationDate = new Date(marathon.endRegistrationDate);
+
+  // Check if registration is open
+  const isRegistrationOpen = currentDate >= startRegistrationDate && currentDate <= endRegistrationDate;
 
   return (
     <div className="container mx-auto py-12">
@@ -34,13 +45,18 @@ const MarathonDetails = () => {
           <strong>Description:</strong> {marathon.description}
         </p>
         <p className="text-gray-600">
-          Registration Dates: {new Date(marathon.startRegistrationDate).toLocaleDateString()} -{" "}
-          {new Date(marathon.endRegistrationDate).toLocaleDateString()}
+          Registration Dates: {startRegistrationDate.toLocaleDateString()} -{" "}
+          {endRegistrationDate.toLocaleDateString()}
         </p>
 
         <button
-          className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-          onClick={() => navigate(`/registers/${id}`)}
+          className={`mt-4 py-2 px-4 rounded ${
+            isRegistrationOpen
+              ? "bg-green-500 text-white hover:bg-green-600"
+              : "bg-gray-400 text-gray-700 cursor-not-allowed"
+          }`}
+          onClick={() => isRegistrationOpen && navigate(`/registers/${id}`)}
+          disabled={!isRegistrationOpen}
         >
           Register
         </button>

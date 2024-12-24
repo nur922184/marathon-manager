@@ -38,7 +38,7 @@ const RegisterPage = () => {
     // Validate email
     try {
         const emailCheckResponse = await fetch(
-            `http://localhost:5000/applications/check-email?email=${formData.email}&marathonId=${id}`
+            `https://asserment-eleven-server.vercel.app/applications/check-email?email=${formData.email}&marathonId=${id}`
           );
       const emailCheckResult = await emailCheckResponse.json();
 
