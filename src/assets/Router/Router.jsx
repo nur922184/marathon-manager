@@ -32,7 +32,7 @@ const Router = createBrowserRouter([
       {
         path: "/marathons",
         element: <Marathon></Marathon>,
-        loader: ()=> fetch('http://localhost:5000/productsCount')
+        loader: ()=> fetch('https://asserment-eleven-server.vercel.app/productsCount')
       },
       {
         path: "/register",

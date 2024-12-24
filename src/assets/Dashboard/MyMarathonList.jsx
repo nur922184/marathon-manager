@@ -23,7 +23,7 @@ const MyMarathonList = () => {
 
         // API call to fetch marathons filtered by email
         const response = await fetch(
-          `http://localhost:5000/marathons?email=${user.email}`
+          `https://asserment-eleven-server.vercel.app/marathons?email=${user.email}`
         );
         const data = await response.json();
 
@@ -60,7 +60,7 @@ const MyMarathonList = () => {
 
       if (result.isConfirmed) {
         // Proceed with delete request
-        const response = await fetch(`http://localhost:5000/marathons/${id}`, {
+        const response = await fetch(`https://asserment-eleven-server.vercel.app/marathons/${id}`, {
           method: "DELETE",
         });
 
@@ -101,7 +101,7 @@ const MyMarathonList = () => {
 
       if (result.isConfirmed) {
         const response = await fetch(
-          `http://localhost:5000/marathons/${selectedMarathon._id}`,
+          `https://asserment-eleven-server.vercel.app/marathons/${selectedMarathon._id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

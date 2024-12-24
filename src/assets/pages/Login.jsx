@@ -50,7 +50,7 @@ const Login = () => {
                 const user = result.user;
                 setUser(user);
                 navigate(location?.state ? location.state : "/", { state: { successMessage: "Successfully logged in!" } });
-                console.log(user);
+                // console.log(user);
             })
             .catch((error) => {
                 let errorMessage = "Login failed. Please try again.";

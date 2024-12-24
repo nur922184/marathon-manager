@@ -20,7 +20,7 @@ const MyApplyList = () => {
           return;
         }
 
-        const response = await fetch(`http://localhost:5000/applications?email=${email}`);
+        const response = await fetch(`https://asserment-eleven-server.vercel.app/applications?email=${email}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -44,7 +44,7 @@ const MyApplyList = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/applications/${id}`, {
+      const response = await fetch(`https://asserment-eleven-server.vercel.app/applications/${id}`, {
         method: "DELETE",
       });
 

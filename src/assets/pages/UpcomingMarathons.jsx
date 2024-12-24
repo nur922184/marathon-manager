@@ -5,7 +5,7 @@ const UpcomingMarathons = () => {
 
     useEffect(() => {
         // Fetch data from the API
-        fetch("http://localhost:5000/upcoming")
+        fetch("https://asserment-eleven-server.vercel.app/upcoming")
             .then((response) => response.json())
             .then((data) => setMarathons(data))
             .catch((error) => console.error("Error fetching marathons:", error));

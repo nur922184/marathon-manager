@@ -23,7 +23,7 @@ const MarathonDetails = () => {
     // Fetch the specific marathon details by ID
     const fetchMarathonDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/marathons/${id}`);
+        const response = await fetch(`https://asserment-eleven-server.vercel.app/marathons/${id}`);
         const data = await response.json();
         setMarathon(data);
       } catch (error) {
@@ -60,7 +60,7 @@ const MarathonDetails = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/applications", {
+      const response = await fetch("https://asserment-eleven-server.vercel.app/applications", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

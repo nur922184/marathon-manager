@@ -55,7 +55,7 @@ const AddMarathon = () => {
             const dataToSubmit = { ...formData, email };
 
             // Send data to the server
-            const response = await fetch("http://localhost:5000/marathons", {
+            const response = await fetch("https://asserment-eleven-server.vercel.app/marathons", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Marathon = () => {
   const [marathons, setMarathons] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10); // প্রতি পেজে কত আইটেম দেখাবে
   const [currentPage, setCurrentPage] = useState(0); // বর্তমান পেজ নম্বর
@@ -20,9 +21,10 @@ const Marathon = () => {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const response = await fetch("http://localhost:5000/productsCount");
+        const response = await fetch("https://asserment-eleven-server.vercel.app/productsCount");
         const data = await response.json();
-        setCount(data.count); // মোট প্রোডাক্ট সংখ্যা
+        setCount(data.count);
+        setLoading(false) // মোট প্রোডাক্ট সংখ্যা
       } catch (error) {
         console.error("Error fetching total count:", error);
       }
@@ -36,7 +38,7 @@ const Marathon = () => {
     const fetchMarathons = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/marathons?page=${currentPage}&size=${itemsPerPage}`
+          `https://asserment-eleven-server.vercel.app/marathons?page=${currentPage}&size=${itemsPerPage}`
         );
         const data = await response.json();
         setMarathons(data); // বর্তমান পেজের ডেটা সেট করা
@@ -52,7 +54,12 @@ const Marathon = () => {
     <div className="container mx-auto py-12">
       <h2 className="text-3xl font-bold text-center mb-6">Marathons</h2>
 
-      {marathons.length === 0 ? (
+      {loading ? (
+        <div className="flex flex-col justify-center items-center h-screen">
+          <span className="loading loading-bars loading-lg"></span>
+          <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
+        </div>
+      ) : marathons.length === 0 ? (
         <p className="text-center text-xl text-gray-500">No marathons available.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -83,7 +90,6 @@ const Marathon = () => {
             </div>
           ))}
         </div>
-
       )}
 
       {/* Pagination */}
