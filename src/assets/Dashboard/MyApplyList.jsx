@@ -39,45 +39,35 @@ const MyApplyList = () => {
     fetchApplications();
   }, [email]);
 
-  const handleEdit = (application) => {
-    setSelectedApplication(application);
-    setIsEditing(true);
-  };
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this application?");
+    if (!confirmDelete) return;
 
-  const handleUpdate = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/applications/${selectedApplication._id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(selectedApplication),
-        }
-      );
+      const response = await fetch(`http://localhost:5000/applications/${id}`, {
+        method: "DELETE",
+      });
 
       if (response.ok) {
-        const updatedApplications = applications.map((app) =>
-          app._id === selectedApplication._id ? selectedApplication : app
-        );
-        setApplications(updatedApplications);
-        setIsEditing(false);
-        toast.success("Application updated successfully.");
+        setApplications(applications.filter((app) => app._id !== id));
+        toast.success("Application deleted successfully.");
       } else {
-        throw new Error("Failed to update application.");
+        throw new Error("Failed to delete application.");
       }
     } catch (error) {
-      console.error("Error updating application:", error);
-      toast.error("Failed to update application.");
+      console.error("Error deleting application:", error);
+      toast.error("Failed to delete application.");
     }
   };
 
   if (loading) {
-    return <div className="flex flex-col justify-center items-center h-screen">
-    <span className="loading loading-bars loading-lg"></span>
-    <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
-  </div>
-    ;
-}
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+        <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">
@@ -133,12 +123,20 @@ const MyApplyList = () => {
                       {application.status || "Pending"}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
+                      <div className="flex items-center justify-center space-x-2">
                       <button
-                        className="btn btn-info btn-sm"
+                        className="btn btn-info btn-sm mr-2"
                         onClick={() => handleEdit(application)}
                       >
                         Edit
                       </button>
+                      <button
+                        className="btn btn-error btn-sm"
+                        onClick={() => handleDelete(application._id)}
+                      >
+                        Delete
+                      </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

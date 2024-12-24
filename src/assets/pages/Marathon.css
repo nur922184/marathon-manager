@@ -30,7 +30,7 @@
     margin-bottom: 40px;
 }
 .pagination button{
-    margin-right: 10px ;
+    margin-right: 20px ;
 }
 .pagination .selected{
     background-color: cornflowerblue;

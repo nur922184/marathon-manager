@@ -32,6 +32,7 @@ const Router = createBrowserRouter([
       {
         path: "/marathons",
         element: <Marathon></Marathon>,
+        loader: ()=> fetch('http://localhost:5000/productsCount')
       },
       {
         path: "/register",
