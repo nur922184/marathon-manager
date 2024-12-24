@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import img1 from '../Images/marathon-logo2.png'
-import img2 from '../Images/marathon-logo2.png'
-import img3 from '../Images/marathon-logo2.png'
-import img4 from '../Images/marathon-logo2.png'
-import img5 from '../Images/marathon-logo2.png'
+import img1 from '../Images/IMG_1.jpg'
+import img2 from '../Images/1 (1).jpg'
+import img3 from '../Images/1 (2).jpg'
+import img4 from '../Images/1 (3).jpg'
+import img5 from '../Images/1 (4).jpg'
 
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
@@ -62,7 +62,7 @@ const Swiper = () => {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className="flex items-center justify-center bg-gray-800 text-lg font-bold rounded-md">
-                    <img className='w-full h-full' src={img1} alt="" />
+                    <img className='w-full h-full' src={img4} alt="" />
                     <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
                         <h2 className="text-4xl font-bold text-white">
                             Join the Marathon Today!
@@ -70,7 +70,7 @@ const Swiper = () => {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className="flex items-center justify-center bg-gray-700 text-lg font-bold rounded-md">
-                    <img className='w-full h-full' src={img2} alt="" />
+                    <img className='w-full h-full' src={img5} alt="" />
                     <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
                         <h2 className="text-4xl font-bold text-white">
                             Run for a Cause, Run for Health

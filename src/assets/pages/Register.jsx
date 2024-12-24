@@ -47,7 +47,7 @@ const Register = () => {
         crateNewUser(email, Password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 setUser(user);
                 UpdateUserProfile({ displayName: name, photoURL: photoUrl })
                     .then(() => {

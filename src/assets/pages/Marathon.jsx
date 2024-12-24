@@ -59,14 +59,14 @@ const Marathon = () => {
           {marathons.map((marathon) => (
             <div
               key={marathon._id}
-              className="border rounded-lg overflow-hidden shadow-lg bg-white"
+              className="border rounded-lg overflow-hidden shadow-lg bg-white flex flex-col"
             >
               <img
                 src={marathon.image || "https://via.placeholder.com/300x200"}
                 alt={marathon.title}
                 className="w-full"
               />
-              <div className="p-4">
+              <div className="p-4 flex-1 flex flex-col">
                 <h3 className="text-lg font-bold">{marathon.title}</h3>
                 <p className="text-gray-600">Location: {marathon.location}</p>
                 <p className="text-gray-600">
@@ -74,13 +74,16 @@ const Marathon = () => {
                   {new Date(marathon.startRegistrationDate).toLocaleDateString()} -{" "}
                   {new Date(marathon.endRegistrationDate).toLocaleDateString()}
                 </p>
-                <Link to={`/marathons/${marathon._id}`}>
-                  <button className="btn btn-primary mt-4 w-full">See Details</button>
-                </Link>
+                <div className="mt-auto">
+                  <Link to={`/marathons/${marathon._id}`}>
+                    <button className="btn btn-primary mt-4 w-full">See Details</button>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
         </div>
+
       )}
 
       {/* Pagination */}
@@ -96,9 +99,8 @@ const Marathon = () => {
         {[...Array(numberOfPages).keys()].map((num) => (
           <button
             key={num}
-            className={`p-2 rounded-md ${
-              currentPage === num ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
+            className={`p-2 rounded-md ${currentPage === num ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
             onClick={() => setCurrentPage(num)}
           >
             {num + 1}

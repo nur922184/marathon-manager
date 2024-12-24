@@ -10,7 +10,7 @@ const AddMarathon = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate(); // Initialize the useNavigate hook
     const email = user.email;
-    console.log(email);
+    // console.log(email);
     const [formData, setFormData] = useState({
         title: "",
         location: "",
