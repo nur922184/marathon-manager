@@ -1,105 +1,22 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { AuthContext } from "../Provider/AuthProvider";
-
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const MarathonDetails = () => {
-  const { id } = useParams(); // Get dynamic ID from the URL
-  const { user } = useContext(AuthContext); // Get user info from context
-  const navigate = useNavigate(); // Initialize navigation hook
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [marathon, setMarathon] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-
-  const handleApplyDisabled = () => {
-    const currentDate = new Date();
-    const startDate = new Date(marathon.startRegistrationDate);
-    const endDate = new Date(marathon.endRegistrationDate);
-    return currentDate < startDate || currentDate > endDate;
-  };
 
   useEffect(() => {
-    // Fetch the specific marathon details by ID
-    const fetchMarathonDetails = async () => {
-      try {
-        const response = await fetch(`https://asserment-eleven-server.vercel.app/marathons/${id}`);
-        const data = await response.json();
-        setMarathon(data);
-      } catch (error) {
-        console.error("Error fetching marathon details:", error);
-        Swal.fire({
-          title: "Error",
-          text: "Failed to load marathon details. Please try again later.",
-          icon: "error",
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMarathonDetails();
+    fetch(`https://asserment-eleven-server.vercel.app/marathons/${id}`) // Replace with your API endpoint
+      .then((response) => response.json())
+      .then((data) => setMarathon(data))
+      .catch((error) => console.error('Error loading details:', error));
   }, [id]);
 
-  const handleApply = async () => {
-    if (!user?.email) {
-      Swal.fire({
-        title: "Error",
-        text: "You need to log in to apply!",
-        icon: "error",
-      });
-      return;
-    }
-
-    const applicationData = {
-      email: user.email,
-      marathonId: marathon._id,
-      title: marathon.title,
-      location: marathon.location,
-      date: new Date(),
-    };
-
-    try {
-      const response = await fetch("https://asserment-eleven-server.vercel.app/applications", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(applicationData),
-      });
-
-      if (response.ok) {
-        Swal.fire({
-          title: "Success",
-          text: "You have applied successfully!",
-          icon: "success",
-        }).then(() => {
-          navigate("/dashboard/my-apply-list"); // Navigate after success
-        });
-      } else {
-        Swal.fire({
-          title: "Error",
-          text: "Failed to apply. Please try again.",
-          icon: "error",
-        });
-      }
-    } catch (error) {
-      console.error("Error applying:", error);
-      Swal.fire({
-        title: "Error",
-        text: "An error occurred. Please try again.",
-        icon: "error",
-      });
-    }
-  };
-
-  if (loading) {
-    return <div className="text-center py-12">Loading...</div>;
-  }
-
-  if (!marathon) {
-    return <div className="text-center py-12">No marathon found!</div>;
-  }
+  if (!marathon) return <div className="flex flex-col justify-center items-center h-screen">
+    <span className="loading loading-bars loading-lg"></span>
+    <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
+  </div>
 
   return (
     <div className="container mx-auto py-12">
@@ -120,13 +37,12 @@ const MarathonDetails = () => {
           Registration Dates: {new Date(marathon.startRegistrationDate).toLocaleDateString()} -{" "}
           {new Date(marathon.endRegistrationDate).toLocaleDateString()}
         </p>
+
         <button
-          onClick={handleApply}
-          disabled={handleApplyDisabled()} // Check if the button should be disabled
-          className={`btn btn-primary w-full mt-4 ${handleApplyDisabled() ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+          className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+          onClick={() => navigate(`/registers/${id}`)}
         >
-          Apply Now
+          Register
         </button>
       </div>
     </div>

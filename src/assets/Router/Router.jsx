@@ -12,6 +12,7 @@ import MyApplyList from "../Dashboard/MyApplyList";
 import PrivatRoute from "./PrivatRoute";
 import UpdateProfile from "../pages/UpdateProfile";
 import ProfilePage from "../pages/ProfilePage";
+import RegisterPage from "../pages/RegisterPage";
 
 
 
@@ -45,6 +46,10 @@ const Router = createBrowserRouter([
       {
         path: "/profile",
         element: <PrivatRoute><ProfilePage></ProfilePage></PrivatRoute>,
+      },
+      {
+        path: "/registers/:id",
+        element: <PrivatRoute><RegisterPage></RegisterPage></PrivatRoute>,
       },
       {
         path: "/update-profile",
