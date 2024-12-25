@@ -3,7 +3,6 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { RotatingLines } from "react-loader-spinner";
 import Loading from "../components/Loading";
 
 const MyApplyList = () => {
@@ -98,7 +97,16 @@ const MyApplyList = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">My Apply List</h1>
+      <div className="flex justify-between mb-4">
+        <h1 className="text-2xl font-bold">My Apply List</h1>
+        <input
+          type="text"
+          placeholder="Search by title..."
+          value={''}
+          onChange={''}
+          className="border p-2 rounded w-1/3"
+        />
+      </div>
       <table className="table-auto w-full border-collapse border border-gray-200">
         <thead>
           <tr>

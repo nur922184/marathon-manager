@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Loading from '../components/Loading';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import Loading from "../components/Loading";
 
 const MarathonDetails = () => {
   const { id } = useParams();
@@ -11,21 +12,27 @@ const MarathonDetails = () => {
     fetch(`https://asserment-eleven-server.vercel.app/marathons/${id}`) // Replace with your API endpoint
       .then((response) => response.json())
       .then((data) => setMarathon(data))
-      .catch((error) => console.error('Error loading details:', error));
+      .catch((error) => console.error("Error loading details:", error));
   }, [id]);
 
   if (!marathon)
     return (
-   <Loading></Loading>
+      <Loading></Loading>
     );
 
-  // Get current date
   const currentDate = new Date();
   const startRegistrationDate = new Date(marathon.startRegistrationDate);
   const endRegistrationDate = new Date(marathon.endRegistrationDate);
 
+  // Calculate time left until registration ends
+  const timeUntilRegistrationEnds = Math.max(
+    (endRegistrationDate - currentDate) / 1000, // সেকেন্ডে সময় গণনা
+    0 // নেগেটিভ সময় এড়ানোর জন্য
+  );
+
   // Check if registration is open
-  const isRegistrationOpen = currentDate >= startRegistrationDate && currentDate <= endRegistrationDate;
+  const isRegistrationOpen =
+    currentDate >= startRegistrationDate && currentDate <= endRegistrationDate;
 
   return (
     <div className="container mx-auto py-12">
@@ -47,6 +54,40 @@ const MarathonDetails = () => {
           {endRegistrationDate.toLocaleDateString()}
         </p>
 
+        {/* Countdown Timer */}
+        <div className="my-6 flex justify-center">
+          <CountdownCircleTimer
+            isPlaying
+            duration={timeUntilRegistrationEnds} // রেজিস্ট্রেশন শেষ হওয়ার সময়
+            colors={[
+              ["#004777", 0.33],
+              ["#F7B801", 0.33],
+              ["#A30000", 0.33],
+            ]}
+            size={120}
+            onComplete={() => {
+              console.log("Countdown completed");
+              return { shouldRepeat: false };
+            }}
+          >
+            {({ remainingTime }) => {
+              const days = Math.floor(remainingTime / (60 * 60 * 24));
+              const hours = Math.floor((remainingTime % (60 * 60 * 24)) / (60 * 60));
+              const minutes = Math.floor((remainingTime % (60 * 60)) / 60);
+
+              return (
+                <div className="text-center">
+                  <div className="text-lg font-bold">{days}d</div>
+                  <div className="text-sm">
+                    {hours}h {minutes}m
+                  </div>
+                </div>
+              );
+            }}
+          </CountdownCircleTimer>
+        </div>
+
+        {/* Register Button */}
         <button
           className={`mt-4 py-2 px-4 rounded ${
             isRegistrationOpen

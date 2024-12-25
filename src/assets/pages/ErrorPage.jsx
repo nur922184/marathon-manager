@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import animation from '../assets/yalantis-interactive-404.gif'
+import animation from '../Images/yalantis-interactive-404.gif'
 
 const ErrorPage = () => {
   const navigate = useNavigate();

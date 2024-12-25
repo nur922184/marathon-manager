@@ -13,15 +13,20 @@ import PrivatRoute from "./PrivatRoute";
 import UpdateProfile from "../pages/UpdateProfile";
 import ProfilePage from "../pages/ProfilePage";
 import RegisterPage from "../pages/RegisterPage";
+import ErrorPage from "../pages/ErrorPage";
 
 
 
 const Router = createBrowserRouter([
-
+  // https://asserment-eleven-server.vercel.app
   {
     path: "/",
     element: <MainLayout></MainLayout>,
     children: [
+      {
+        path: "*",
+        element: <ErrorPage></ErrorPage>,
+      },
       {
         path: "",
         element: <Home></Home>,
@@ -33,7 +38,7 @@ const Router = createBrowserRouter([
       {
         path: "/marathons",
         element: <Marathon></Marathon>,
-        loader: ()=> fetch('https://asserment-eleven-server.vercel.app/productsCount')
+        loader: () => fetch('https://asserment-eleven-server.vercel.app/productsCount')
       },
       {
         path: "/register",
