@@ -1,7 +1,6 @@
 import React from 'react';
 import Aside from '../Dashboard/Aside';
 import { Outlet } from 'react-router-dom';
-
 const DashboardLayout = () => {
     return (
         <div className='grid md:grid-cols-12 border'>

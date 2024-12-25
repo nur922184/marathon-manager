@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 const MarathonDetails = () => {
   const { id } = useParams();
@@ -15,10 +16,7 @@ const MarathonDetails = () => {
 
   if (!marathon)
     return (
-      <div className="flex flex-col justify-center items-center h-screen">
-        <span className="loading loading-bars loading-lg"></span>
-        <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
-      </div>
+   <Loading></Loading>
     );
 
   // Get current date

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import Loading from "../components/Loading";
+import '../layouts/Styles/btn.css'
 
 const RegisterPage = () => {
   const { id } = useParams();
@@ -90,7 +92,7 @@ const RegisterPage = () => {
     }
   };
 
-  if (!marathon) return <p>Loading...</p>;
+  if (!marathon) return <Loading></Loading>;
 
   return (
     <div className="container mx-auto p-6">
@@ -145,7 +147,7 @@ const RegisterPage = () => {
             Contact Number
           </label>
           <input
-            type="text"
+            type="number"
             name="contactNumber"
             value={formData.contactNumber}
             onChange={handleChange}
@@ -170,7 +172,7 @@ const RegisterPage = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          className=" buttons"
         >
           Register
         </button>

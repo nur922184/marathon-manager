@@ -3,6 +3,8 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { RotatingLines } from "react-loader-spinner";
+import Loading from "../components/Loading";
 
 const MyApplyList = () => {
   const { user } = useContext(AuthContext)
@@ -12,6 +14,15 @@ const MyApplyList = () => {
   const [updateData, setUpdateData] = useState({});
 
   // Fetch applications for logged-in user
+
+  useEffect(() => {
+    // Simulate an API call or some asynchronous operation
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // Replace with your actual loading logic
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     if (user?.email) {
       fetch(`https://asserment-eleven-server.vercel.app/applications?email=${user.email}`)
@@ -19,7 +30,6 @@ const MyApplyList = () => {
         .then((data) => setApplications(data))
         .catch((error) => console.error("Error fetching applications:", error));
     }
-    setLoading(false)
   }, [user]);
 
   // Handle delete
@@ -81,10 +91,7 @@ const MyApplyList = () => {
   };
 
   if (loading) {
-    return <div className="flex flex-col justify-center items-center h-screen">
-      <span className="loading loading-bars loading-lg"></span>
-      <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
-    </div>
+    return <Loading></Loading>
       ;
   }
 
@@ -104,25 +111,25 @@ const MyApplyList = () => {
         <tbody>
           {applications.map((app) => (
             <tr key={app._id}>
-              <td className="border border-gray-300 px-4 py-2">{app.additionalInfo}</td>
+              <td className="border border-gray-300 px-4 py-2">{app.marathonTitle}</td>
               <td className="border border-gray-300 px-4 py-2">
                 {new Date(app.date).toLocaleDateString()}
               </td>
               <td className="border border-gray-300 px-4 py-2">{app.contactNumber}</td>
               <td className="border border-gray-300 px-4 py-2">
                 <div className="flex items-center justify-center space-x-2">
-                <button
-                  className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
-                  onClick={() => setSelectedApplication(app)}
-                >
-                   <FaEdit />
-                </button>
-                <button
-                  className="bg-red-500 text-white px-2 py-1 rounded"
-                  onClick={() => handleDelete(app._id)}
-                >
-                 <MdDelete />
-                </button>
+                  <button
+                    className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
+                    onClick={() => setSelectedApplication(app)}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    onClick={() => handleDelete(app._id)}
+                  >
+                    <MdDelete />
+                  </button>
                 </div>
               </td>
             </tr>
@@ -159,7 +166,7 @@ const MyApplyList = () => {
               <div>
                 <label>Contact Number</label>
                 <input
-                  type="text"
+                  type="number"
                   name="contactNumber"
                   defaultValue={selectedApplication.contactNumber}
                   onChange={handleInputChange}

@@ -35,3 +35,124 @@
 .pagination .selected{
     background-color: cornflowerblue;
 }
+
+/* From Uiverse.io by alexruix */ 
+.card {
+    width: 390px;
+    height: 430px;
+    border-radius: 20px;
+    background: #f5f5f5;
+    position: relative;
+    padding: 2px;
+    border: 2px solid #c3c6ce;
+    transition: 0.5s ease-out;
+    overflow: visible;
+   }
+   
+   /* .card-details {
+    color: black;
+    height: 100%;
+    gap: .5em;
+    display: grid;
+    place-content: center;
+   } */
+   
+   .card-button {
+    transform: translate(-50%, 125%);
+    width:50%;
+    border-radius: 1rem;
+    border: none;
+    background-color: #008bf8;
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+   }
+   
+   .text-body {
+    color: rgb(134, 134, 134);
+   }
+   
+   /*Text*/
+   .text-title {
+    font-size: 1.5em;
+    font-weight: bold;
+   }
+   
+   /*Hover*/
+   .card:hover {
+    border-color: #008bf8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+   }
+   
+   .card:hover .card-button {
+    transform: translate(-50%, 50%);
+    opacity: 1;
+   }
+
+
+   /* From Uiverse.io by gharsh11032000 */ 
+.cards {
+    width: 100%;
+    height: 100%;
+    background-color: #4158d0;
+    background-image: linear-gradient(
+      43deg,
+      #4158d0 0%,
+      #c850c0 46%,
+      #ffcc70 100%
+    );
+    border-radius: 8px;
+    color: white;
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    transform: translate3d(7%, -2%, 0px) scale3d(0.9, 0.8, 1) rotateX(15deg)
+      rotateY(-6deg) rotateZ(15deg);
+  }
+  
+
+  .cards:hover {
+    transform: rotateY(0) rotateX(0) scale(1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cards:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+  }
+  
+  .cards:hover:before {
+    transform: translateX(-100%);
+  }
+  
+  .cards:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+  }
+  
+  .cards:hover:after {
+    transform: translateX(100%);
+  }
+  

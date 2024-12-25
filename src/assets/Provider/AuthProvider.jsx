@@ -4,6 +4,7 @@ import app from "../Firebase/Firebase.init";
 export const AuthContext = createContext()
 import { toast, } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -21,14 +22,33 @@ const AuthProviders = ({ children }) => {
         return sendPasswordResetEmail(auth, email)
     };
     const Logout = () => {
-        setLoding(true);
-        toast.info("Successfully Logout!", {
-            position: "top-center",
-            autoClose: 3000, 
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You want to log out?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, log out!",
+          cancelButtonText: "Cancel",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            setLoding(true);
+            signOut(auth)
+              .then(() => {
+                toast.info("Successfully Logout!", {
+                  position: "top-center",
+                  autoClose: 3000,
+                });
+              })
+              .catch((error) => {
+                toast.error(`Logout failed: ${error.message}`, {
+                  position: "top-center",
+                });
+              });
+          }
         });
-        return signOut(auth)
-    }
-
+      };
     const continueToGoogle = () => {
         setLoding(true); 
         signInWithPopup(auth, Porvider)

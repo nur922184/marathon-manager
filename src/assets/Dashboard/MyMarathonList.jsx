@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import Loading from "../components/Loading";
 
 const MyMarathonList = () => {
   const { user } = useContext(AuthContext); // Context থেকে ব্যবহারকারীর তথ্য পাওয়া
@@ -127,10 +128,7 @@ const MyMarathonList = () => {
 
 
   if (loading) {
-    return <div className="flex flex-col justify-center items-center h-screen">
-      <span className="loading loading-bars loading-lg"></span>
-      <h2 className="text-center text-2xl font-bold py-2">Loading...</h2>
-    </div>
+    return <Loading></Loading>
       ;
   }
 
