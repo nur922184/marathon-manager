@@ -12,7 +12,7 @@ const UpcomingMarathons = () => {
     }, []);
 
     return (
-        <section className="bg-gray-100 py-12">
+        <section className="bg-gray-100 dark:bg-gray-800 py-12">
             <div className="container mx-auto">
                 <h2 className="text-3xl font-bold text-center mb-6">Upcoming Marathons</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -20,7 +20,7 @@ const UpcomingMarathons = () => {
                     {marathons.map((marathon) => (
                         <div
                             key={marathon._id}
-                            className="border rounded-lg overflow-hidden shadow-lg bg-white flex flex-col"
+                            className="border rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-900 flex flex-col"
                         >
                             <img
                                 src={marathon.image}

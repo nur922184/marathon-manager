@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { toast,} from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider";
-
+  
 const UpdateProfile = () => {
   const { user } = useContext(AuthContext);
   const [name, setName] = useState(user.displayName || "");

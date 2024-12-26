@@ -61,10 +61,10 @@ const Marathon = () => {
       ) : marathons.length === 0 ? (
         <p className="text-center text-xl text-gray-500">No marathons available.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {marathons.map((marathon) => (
 
-            <div key={marathon._id} className="card mx-auto">
+            <div key={marathon._id} className="card mx-auto dark:border-gray-600">
                 <img
                   src={marathon.image || "https://via.placeholder.com/300x200"}
                   alt={marathon.title}
@@ -108,7 +108,7 @@ const Marathon = () => {
       {/* Pagination */}
       <div className="pagination mt-14 flex items-center justify-center gap-2">
         <button
-          className="bg-gray-300 p-2 rounded-md hover:bg-gray-400"
+          className="bg-gray-300 p-2 dark:bg-gray-700 text-white rounded-md hover:bg-gray-400"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
           disabled={currentPage === 0}
         >
@@ -118,7 +118,7 @@ const Marathon = () => {
         {[...Array(numberOfPages).keys()].map((num) => (
           <button
             key={num}
-            className={`p-2 rounded-md ${currentPage === num ? "bg-blue-500 text-white" : "bg-gray-200"
+            className={`p-2 rounded-md ${currentPage === num ? "bg-blue-500  dark:bg-zinc-800 text-white" : "bg-gray-200 dark:bg-gray-700 text-white"
               }`}
             onClick={() => setCurrentPage(num)}
           >
@@ -127,7 +127,7 @@ const Marathon = () => {
         ))}
 
         <button
-          className="bg-gray-300 p-2 rounded-md hover:bg-gray-400"
+          className="bg-gray-300 dark:bg-gray-700 text-white p-2 rounded-md hover:bg-gray-400"
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, numberOfPages - 1))
           }
@@ -138,7 +138,7 @@ const Marathon = () => {
 
         {/* Items per page */}
         <select
-          className="ml-4 p-2 bg-gray-200 rounded-md"
+          className="ml-4 p-2 bg-gray-200 rounded-md dark:bg-gray-700 text-white"
           value={itemsPerPage}
           onChange={handleItemsPerPage}
         >
