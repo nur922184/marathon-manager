@@ -45,7 +45,7 @@ const Navbar = () => {
         <div className="navbar dark:text-white sticky top-0 z-50 bg-base-50 dark:bg-slate-800 dark:bg-opacity-50 ">
             <div className="navbar-start h-11">
 
-                <NavLink to='/'> <img className='w-20 h-20' src={Logo} alt="" /></NavLink>
+                <NavLink to='/'> <img className='w-24 h-16' src={Logo} alt="" /></NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -64,7 +64,7 @@ const Navbar = () => {
                     {theme === "light" ? <BsMoon size={18} /> : <BsSun size={18} />}
                 </button>
                 {
-                    user && user?.email ? (<div className="dropdown dropdown-end">
+                    user && user?.email ? (<div className="dropdown  dropdown-end">
                         <div tabIndex={0} role="button" className='flex gap-3'>
                             <div className="w-10 h-10 border rounded-full border-sky-500 ">
                                 <div className="rounded-full ">
@@ -83,8 +83,8 @@ const Navbar = () => {
                                     <span className="badge">New</span>
                                 </Link>
                             </li>
-                            <li>{user && user.email}</li>
-                            <button onClick={Logout} className='btn btn-sm'>LogOut</button>
+                            <li className='dark:text-black'>{user && user.email}</li>
+                            <button onClick={Logout} className='btn btn-sm bg-slate-400'>LogOut</button>
                         </ul>
                     </div>) :
                         (<div className="dropdown dropdown-end flex items-center gap-4">

@@ -102,18 +102,18 @@ const RegisterPage = () => {
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
           <input
             type="text"
             name="email"
             value={formData.email}
             readOnly
-            className="mt-1 block w-full p-2 border rounded-md bg-gray-200"
+            className="mt-1 block w-full p-2 border rounded-md bg-gray-200 dark:bg-slate-900"
           />
         </div>
         {/* First Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             First Name
           </label>
           <input
@@ -123,12 +123,12 @@ const RegisterPage = () => {
             onChange={handleChange}
             placeholder="Enter your first name"
             required
-            className="mt-1 block w-full p-2 border rounded-md"
+            className="mt-1 block w-full p-2 border dark:bg-slate-900 rounded-md"
           />
         </div>
         {/* Last Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Last Name
           </label>
           <input
@@ -138,12 +138,12 @@ const RegisterPage = () => {
             onChange={handleChange}
             placeholder="Enter your last name"
             required
-            className="mt-1 block w-full p-2 border rounded-md"
+            className="mt-1 block w-full p-2 border rounded-md dark:bg-slate-900"
           />
         </div>
         {/* Contact Number */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Contact Number
           </label>
           <input
@@ -153,12 +153,12 @@ const RegisterPage = () => {
             onChange={handleChange}
             placeholder="Enter your contact number"
             required
-            className="mt-1 block w-full p-2 border rounded-md"
+            className="mt-1 block w-full p-2 border rounded-md dark:bg-slate-900"
           />
         </div>
         {/* Additional Info */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Additional Info
           </label>
           <textarea
@@ -166,7 +166,7 @@ const RegisterPage = () => {
             value={formData.additionalInfo}
             onChange={handleChange}
             placeholder="Enter any additional information"
-            className="mt-1 block w-full p-2 border rounded-md"
+            className="mt-1 block w-full p-2 border rounded-md dark:bg-slate-900"
           ></textarea>
         </div>
         {/* Submit Button */}

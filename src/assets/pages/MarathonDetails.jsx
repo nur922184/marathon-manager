@@ -36,7 +36,7 @@ const MarathonDetails = () => {
 
   return (
     <div className="container mx-auto py-12">
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <div className="max-w-4xl mx-auto bg-white dark:bg-slate-800 dark:text-white p-6 rounded-lg shadow-lg">
         <div 
          style={{
           backgroundImage: `url(${marathon.image })`,
@@ -51,13 +51,13 @@ const MarathonDetails = () => {
           </div>
         </div>
         <h2 className="text-3xl font-bold mb-4 mt-6">{marathon.title}</h2>
-        <p className="text-gray-700 mb-2">
+        <p className="text-gray-700 dark:text-gray-400 mb-2">
           <strong>Location:</strong> {marathon.location}
         </p>
-        <p className="text-gray-700 mb-4">
+        <p className="text-gray-700 dark:text-gray-400 mb-4">
           <strong>Description:</strong> {marathon.description}
         </p>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-400">
           Registration Dates: {startRegistrationDate.toLocaleDateString()} -{" "}
           {endRegistrationDate.toLocaleDateString()}
         </p>

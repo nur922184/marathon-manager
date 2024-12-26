@@ -139,9 +139,9 @@ const MyMarathonList = () => {
         <div>No marathons found.</div>
       ) : (
         <>
-          <table className="table-auto w-full border-collapse border border-gray-300">
+          <table className="table-auto w-full border-collapse border">
             <thead>
-              <tr className="bg-gray-200">
+              <tr className="">
                 <th className="border border-gray-300 px-4 py-2">Title</th>
                 <th className="border border-gray-300 px-4 py-2">Location</th>
                 <th className="border border-gray-300 px-4 py-2">Start Date</th>
@@ -150,7 +150,7 @@ const MyMarathonList = () => {
             </thead>
             <tbody>
               {marathons.map((marathon) => (
-                <tr key={marathon._id} className="hover:bg-gray-100">
+                <tr key={marathon._id} className="">
                   <td className="border border-gray-300 px-4 py-2">
                     {marathon.title}
                   </td>
@@ -184,15 +184,13 @@ const MyMarathonList = () => {
               ))}
             </tbody>
           </table>
-
-          {/* Update Modal */}
           {/* Update Modal */}
           {isModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-6 rounded shadow-lg w-96">
+              <div className="bg-white dark:bg-slate-600 dark:text-white p-6 rounded shadow-lg w-96">
                 <h3 className="text-xl font-bold mb-4">Update Marathon</h3>
                 <div className="mb-4">
-                  <label className="block text-gray-700">Title:</label>
+                  <label className="block text-gray-700 dark:text-gray-300">Title:</label>
                   <input
                     type="text"
                     value={selectedMarathon.title}
@@ -202,11 +200,11 @@ const MyMarathonList = () => {
                         title: e.target.value,
                       })
                     }
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full dark:bg-slate-800 dark:text-white"
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700">Location:</label>
+                  <label className="block text-gray-700 dark:text-gray-300">Location:</label>
                   <input
                     type="text"
                     value={selectedMarathon.location}
@@ -216,11 +214,11 @@ const MyMarathonList = () => {
                         location: e.target.value,
                       })
                     }
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full dark:bg-slate-800 dark:text-white"
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700">Start Date:</label>
+                  <label className="block text-gray-700 dark:text-gray-300">Start Date:</label>
                   <input
                     type="date"
                     value={selectedMarathon.startDate ? selectedMarathon.startDate.split("T")[0] : ""}
@@ -230,11 +228,11 @@ const MyMarathonList = () => {
                         startDate: new Date(e.target.value).toISOString(),
                       })
                     }
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full dark:bg-slate-800 dark:text-white"
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700">End Registration Date:</label>
+                  <label className="block text-gray-700 dark:text-gray-300">End Registration Date:</label>
                   <input
                     type="date"
                     value={
@@ -248,7 +246,7 @@ const MyMarathonList = () => {
                         endRegistrationDate: new Date(e.target.value).toISOString(),
                       })
                     }
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full dark:bg-slate-800 dark:text-white"
                   />
                 </div>
                 <div className="flex justify-end">

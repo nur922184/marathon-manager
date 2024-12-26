@@ -75,21 +75,21 @@ const Login = () => {
     return (
         <div>
             <div className=' flex  justify-center items-center'>
-                <div className=" bg-base-100 w-full max-w-lg shrink-0 shadow-2xl p-10">
+                <div className=" bg-base-100 dark:bg-slate-700 dark:text-white w-full max-w-lg shrink-0 shadow-2xl p-10">
                     <h2 className='text-center text-2xl font-semibold mt-5 mb-6'>Login Your Account</h2>
                     <hr />
                     <form onSubmit={hanldeSubmiteLogin} className="card-body">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text dark:text-white">Email</span>
                             </label>
-                            <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+                            <input type="email" name='email' placeholder="email" className="input input-bordered dark:bg-slate-800" required />
                         </div>
                         <div className="form-control relative">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text dark:text-white">Password</span>
                             </label>
-                            <input type={show ? 'text' : 'password'} name='password' placeholder="password" className="input input-bordered" required />
+                            <input type={show ? 'text' : 'password'} name='password' placeholder="password" className="input input-bordered dark:bg-slate-800" required />
                             {
                                 error.Login && (
                                     <label className="label text-sm text-red-600">
@@ -97,25 +97,25 @@ const Login = () => {
                                     </label>
                                 )
                             }
-                            <div onClick={() => setShow(!show)} className='btn btn-sm w-10 absolute right-4 top-11 '>
+                            <div onClick={() => setShow(!show)} className=' absolute right-4 top-12 '>
                                 {
-                                    show ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                                    show ? <FaEyeSlash size={20}></FaEyeSlash> : <FaEye size={20}></FaEye>
                                 }
                             </div>
                             <label className="label">
-                                <span className="label-text-alt link link-hover" onClick={handleForgotPassword}>
+                                <span className="label-text-alt link link-hover dark:text-fuchsia-300" onClick={handleForgotPassword}>
                                     Forgot password?
                                 </span>
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-outline">Login</button>
+                            <button className="btn btn-outline dark:text-yellow-50">Login</button>
                         </div>
                     </form>
                     <button onClick={continueToGoogle} className="btn">
                         <FaGoogle></FaGoogle> Login with Google
                     </button>
-                    <p className='text-center'> Don t Have An Account ? <NavLink to="/register" className='text-blue-700 font-semibold'>Register</NavLink></p>
+                    <p className='text-center'> Don t Have An Account ? <NavLink to="/register" className='text-blue-700 font-semibold link-hover dark:text-blue-400 '>Register</NavLink></p>
                 </div>
             </div>
             <ToastContainer></ToastContainer>

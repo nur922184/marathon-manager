@@ -104,7 +104,7 @@ const MyApplyList = () => {
           placeholder="Search by title..."
           value={''}
           onChange={''}
-          className="border p-2 rounded w-1/3"
+          className="border p-2 rounded w-1/3 dark:bg-slate-900"
         />
       </div>
       <table className="table-auto w-full border-collapse border border-gray-200">
@@ -148,17 +148,17 @@ const MyApplyList = () => {
       {/* Update Modal */}
       {selectedApplication && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded shadow-lg">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-lg">
             <h2 className="text-xl font-bold mb-4">Update Registration</h2>
             <form onSubmit={handleUpdate} className="space-y-4">
               <div>
-                <label>First Name</label>
+                <label className=" dark:text-white">First Name</label>
                 <input
                   type="text"
                   name="firstName"
                   defaultValue={selectedApplication.firstName}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded dark:bg-gray-800"
                 />
               </div>
               <div>
@@ -168,7 +168,7 @@ const MyApplyList = () => {
                   name="lastName"
                   defaultValue={selectedApplication.lastName}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded dark:bg-gray-800"
                 />
               </div>
               <div>
@@ -178,7 +178,7 @@ const MyApplyList = () => {
                   name="contactNumber"
                   defaultValue={selectedApplication.contactNumber}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded dark:bg-gray-800"
                 />
               </div>
               <button

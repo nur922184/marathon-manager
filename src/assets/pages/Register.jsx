@@ -74,15 +74,15 @@ const Register = () => {
     return (
         <div>
             <div className='flex justify-center '>
-                <div className="bg-base-100 w-full max-w-lg shrink-0 shadow-2xl p-10">
+                <div className="bg-base-100 w-full max-w-lg shrink-0 shadow-2xl p-10 dark:bg-slate-700 dark:text-white">
                     <h2 className='text-center text-2xl font-semibold mt-5 mb-6'>Register a new Account</h2>
                     <hr />
                     <form onSubmit={handleSubmit} className="card-body">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Name</span>
+                                <span className="label-text dark:text-white">Name</span>
                             </label>
-                            <input type="text" name='name' placeholder="Name" className="input input-bordered" required />
+                            <input type="text" name='name' placeholder="Name" className="input input-bordered dark:bg-slate-800" required />
                         </div>
                         {
                             error.name && (
@@ -93,15 +93,15 @@ const Register = () => {
                         }
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Photo Url</span>
+                                <span className="label-text dark:text-white">Photo Url</span>
                             </label>
-                            <input type="text" name='photo' placeholder="PhotoUrl" className="input input-bordered" required />
+                            <input type="text" name='photo' placeholder="PhotoUrl" className="input input-bordered dark:bg-slate-800" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text dark:text-white">Email</span>
                             </label>
-                            <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+                            <input type="email" name='email' placeholder="email" className="input input-bordered dark:bg-slate-800" required />
                             {
                                 error.email && (
                                     <label className="label">
@@ -112,9 +112,9 @@ const Register = () => {
                         </div>
                         <div className="form-control relative">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text dark:text-white">Password</span>
                             </label>
-                            <input type={show ? 'text' : 'password'} name='password' placeholder="password" className="input input-bordered" required />
+                            <input type={show ? 'text' : 'password'} name='password' placeholder="password" className="input input-bordered dark:bg-slate-800" required />
                             {
                                 ErrorPass.password && (
                                     <label className="label">
@@ -122,14 +122,14 @@ const Register = () => {
                                     </label>
                                 )
                             }
-                            <div onClick={() => setShow(!show)} className='btn btn-sm w-10 absolute right-4 top-11 '>
+                            <div onClick={() => setShow(!show)} className='absolute right-4 top-12 '>
                                 {
-                                    show ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                                    show ? <FaEyeSlash size={20}></FaEyeSlash> : <FaEye size={20}></FaEye> 
                                 }
                             </div>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-outline">Register</button>
+                            <button className="btn btn-outline dark:text-yellow-100">Register</button>
                         </div>
                     </form>
                     <p className='text-center'>Already Have An Account ? <NavLink to="/login" className='text-blue-700 font-semibold'>Login</NavLink></p>

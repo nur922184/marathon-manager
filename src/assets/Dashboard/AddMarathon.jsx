@@ -99,14 +99,14 @@ const AddMarathon = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-6 text-center">Add Marathon</h2>
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Title Input */}
                     <div>
                         <label className="label">
-                            <span className="label-text">Marathon Title</span>
+                            <span className="label-text dark:text-white">Marathon Title</span>
                         </label>
                         <input
                             type="text"
@@ -114,7 +114,7 @@ const AddMarathon = () => {
                             placeholder="Marathon Title"
                             value={formData.title}
                             onChange={handleChange}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full dark:bg-slate-900"
                             required
                         />
                     </div>
@@ -122,7 +122,7 @@ const AddMarathon = () => {
                     {/* Location Input */}
                     <div>
                         <label className="label">
-                            <span className="label-text">Location</span>
+                            <span className="label-text  dark:text-white">Location</span>
                         </label>
                         <input
                             type="text"
@@ -130,7 +130,7 @@ const AddMarathon = () => {
                             placeholder="Location"
                             value={formData.location}
                             onChange={handleChange}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full dark:bg-slate-900"
                             required
                         />
                     </div>
@@ -138,14 +138,14 @@ const AddMarathon = () => {
                     {/* Start Registration Date */}
                     <div>
                         <label className="label">
-                            <span className="label-text">Start Registration Date</span>
+                            <span className="label-text  dark:text-white">Start Registration Date</span>
                         </label>
                         <input
                             type="date"
                             name="startRegistrationDate"
                             value={formData.startRegistrationDate}
                             onChange={handleChange}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full dark:bg-slate-900"
                             required
                         />
                     </div>
@@ -153,14 +153,14 @@ const AddMarathon = () => {
                     {/* End Registration Date */}
                     <div>
                         <label className="label">
-                            <span className="label-text">End Registration Date</span>
+                            <span className="label-text  dark:text-white">End Registration Date</span>
                         </label>
                         <input
                             type="date"
                             name="endRegistrationDate"
                             value={formData.endRegistrationDate}
                             onChange={handleChange}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full dark:bg-slate-900"
                             required
                         />
                     </div>
@@ -168,14 +168,14 @@ const AddMarathon = () => {
                     {/* Start Date */}
                     <div>
                         <label className="label">
-                            <span className="label-text">Marathon Start Date</span>
+                            <span className="label-text  dark:text-white">Marathon Start Date</span>
                         </label>
                         <input
                             type="date"
                             name="startDate"
                             value={formData.startDate}
                             onChange={handleChange}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full dark:bg-slate-900"
                             required
                         />
                     </div>
@@ -183,13 +183,13 @@ const AddMarathon = () => {
                     {/* Distance Selector */}
                     <div>
                         <label className="label">
-                            <span className="label-text">Distance</span>
+                            <span className="label-text  dark:text-white">Distance</span>
                         </label>
                         <select
                             name="distance"
                             value={formData.distance}
                             onChange={handleChange}
-                            className="select select-bordered w-full max-w-xs">
+                            className="select select-bordered w-full dark:bg-slate-900 max-w-xs">
                             <option disabled selected value="3k">3k</option>
                             <option value="10k">10k</option>
                             <option value="25k">25k</option>
@@ -200,14 +200,14 @@ const AddMarathon = () => {
                 {/* Description */}
                 <div className="mt-4">
                     <label className="label">
-                        <span className="label-text">Description</span>
+                        <span className="label-text  dark:text-white">Description</span>
                     </label>
                     <textarea
                         name="description"
                         placeholder="Description"
                         value={formData.description}
                         onChange={handleChange}
-                        className="textarea textarea-bordered w-full"
+                        className="textarea textarea-bordered dark:bg-slate-900 w-full"
                         required
                     />
                 </div>
@@ -215,7 +215,7 @@ const AddMarathon = () => {
                 {/* Image URL */}
                 <div className="mt-4">
                     <label className="label">
-                        <span className="label-text">Marathon Image URL</span>
+                        <span className="label-text  dark:text-white">Marathon Image URL</span>
                     </label>
                     <input
                         type="url"
@@ -223,7 +223,7 @@ const AddMarathon = () => {
                         placeholder="Marathon Image URL"
                         value={formData.image}
                         onChange={handleChange}
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:bg-slate-900"
                         required
                     />
                 </div>
