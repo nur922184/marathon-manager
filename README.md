@@ -3,7 +3,7 @@
 Welcome to the **Marathon Registration Platform**, an intuitive and user-friendly solution for marathon enthusiasts! This platform allows users to explore, register, and track marathon events seamlessly.
 
 ### 🌐 Live Site URL
-[Marathon Registration Platform Live Site](https://asserment-eleven-server.vercel.app)
+[Marathon Registration Platform Live Site](https://assignment-eleven-8d2c2.web.app/)
 
 ---
 
