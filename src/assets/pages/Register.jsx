@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../Provider/AuthProvider';
+import bg from '../Images/login.jpg' 
 
 const Register = () => {
 
@@ -73,8 +74,12 @@ const Register = () => {
 
     return (
         <div>
-            <div className='flex justify-center '>
-                <div className="bg-base-100 w-full max-w-lg shrink-0 shadow-2xl p-10 dark:bg-slate-700 dark:text-white">
+            <div
+                style={{
+                    backgroundImage: `url(${bg})`,
+                }}
+                className='flex justify-center bg-cover bg-center'>
+                <div className="bg-white/10 backdrop-blur-lg w-full max-w-lg shrink-0 shadow-2xl p-10 dark:bg-white/10 dark:text-white">
                     <h2 className='text-center text-2xl font-semibold mt-5 mb-6'>Register a new Account</h2>
                     <hr />
                     <form onSubmit={handleSubmit} className="card-body">
@@ -124,7 +129,7 @@ const Register = () => {
                             }
                             <div onClick={() => setShow(!show)} className='absolute right-4 top-12 '>
                                 {
-                                    show ? <FaEyeSlash size={20}></FaEyeSlash> : <FaEye size={20}></FaEye> 
+                                    show ? <FaEyeSlash size={20}></FaEyeSlash> : <FaEye size={20}></FaEye>
                                 }
                             </div>
                         </div>

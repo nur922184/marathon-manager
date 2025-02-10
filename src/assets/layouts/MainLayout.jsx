@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const MainLayout = () => {
 
@@ -11,17 +11,20 @@ const MainLayout = () => {
     const handleLogout = () => {
         console.log("User logged out");
       };
+      const location = useLocation();
+      const noHeaderFooter = location.pathname.includes('login') || location.pathname.includes('register')
 
     return (
         <div className='dark:bg-gray-900 m-auto max-w-screen-2xl text-black dark:text-white'>
             <nav className='sticky top-0 backdrop-blur bg-opacity-0 z-50 bg-base-100'>
-            <Navbar isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout}></Navbar>
+            {noHeaderFooter || <Navbar isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout}></Navbar>} 
             </nav>
             <main>
                 <Outlet></Outlet>
             </main>
             <footer>
-               <Footer></Footer>
+            { noHeaderFooter || <Footer></Footer>}
+              
             </footer>
         </div>
     );

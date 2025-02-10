@@ -33,6 +33,8 @@ const Navbar = () => {
     const Links = <>
         <li><NavLink to='/'>Home</NavLink> </li>
         <li><NavLink to='/marathons'>Marathons</NavLink> </li>
+        <li><NavLink to='/about'>About</NavLink> </li>
+        <li><NavLink to='/contact'>Contact</NavLink> </li>
 
         {
             user && <>
@@ -48,7 +50,7 @@ const Navbar = () => {
                 <NavLink to='/'> <img className='w-24 h-16' src={Logo} alt="" /></NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal gap-2 px-1">
                     {Links}
                 </ul>
             </div>

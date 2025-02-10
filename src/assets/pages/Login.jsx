@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../Provider/AuthProvider';
+import bg from '../Images/login.jpg'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -74,8 +75,12 @@ const Login = () => {
 
     return (
         <div>
-            <div className=' flex  justify-center items-center'>
-                <div className=" bg-base-100 dark:bg-slate-700 dark:text-white w-full max-w-lg shrink-0 shadow-2xl p-10">
+            <div
+                style={{
+                    backgroundImage: `url(${bg})`,
+                }}
+                className=' flex h-screen justify-center items-center bg-cover'>
+                <div className=" bg-white/10 backdrop-blur-lg dark:bg-white/10 dark:text-white w-full max-w-lg shrink-0 shadow-2xl p-10">
                     <h2 className='text-center text-2xl font-semibold mt-5 mb-6'>Login Your Account</h2>
                     <hr />
                     <form onSubmit={hanldeSubmiteLogin} className="card-body">
