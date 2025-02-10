@@ -13,7 +13,7 @@ const MainLayout = () => {
       };
 
     return (
-        <div className='dark:bg-gray-900  text-black dark:text-white'>
+        <div className='dark:bg-gray-900 m-auto max-w-screen-2xl text-black dark:text-white'>
             <nav className='sticky top-0 backdrop-blur bg-opacity-0 z-50 bg-base-100'>
             <Navbar isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout}></Navbar>
             </nav>

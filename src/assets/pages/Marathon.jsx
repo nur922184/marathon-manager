@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
-import './Marathon.css'
+// import './Marathon.css'
 const Marathon = () => {
   const [marathons, setMarathons] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,14 +63,14 @@ const Marathon = () => {
         <div className="grid grid-cols-1 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {marathons.map((marathon) => (
 
-            <div key={marathon._id} className="card mx-auto dark:border-gray-600">
-                <img
-                  src={marathon.image || "https://via.placeholder.com/300x200"}
+            <div key={marathon._id} className="card mx-auto w-96 dark:border-gray-600 bg-white/5 backdrop-blur-lg border-2">
+                <img 
+                  src={marathon.image || "https://ibb.co.com/8nQZWB7f"}
                   alt={marathon.title}
                   className="cards w-100% h-64 rounded-lg"
                 />
                 <div className="p-4 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold">{marathon.title}</h3>
+                  <h3 className="text-lg font-bold dark:text-gray-100">{marathon.title}</h3>
                   <p className="text-gray-600">Location: {marathon.location}</p>
                   <p className="text-gray-600 mb-5">
                     Registration:{" "}
@@ -101,6 +100,8 @@ const Marathon = () => {
                   </div>
                 </div>
             </div>
+
+            
           ))}
         </div>
       )}

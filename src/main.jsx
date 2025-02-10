@@ -10,8 +10,10 @@ import AuthProviders from './assets/Provider/AuthProvider';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProviders>
-    <RouterProvider router={Router} />
-    </AuthProviders>
+    <div>
+      <AuthProviders>
+        <RouterProvider router={Router} />
+      </AuthProviders>
+    </div>
   </StrictMode>,
 )
