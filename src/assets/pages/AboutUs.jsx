@@ -6,7 +6,7 @@ const teamMembers = [
         name: "Md.Nuruzzaman",
         role: "founder & ceo Open IT Institute",
         img: "https://i.ibb.co.com/ThqSXn9/468478725-2357109847956765-5882425726693989952-n.jpg",
-        dis:"MD. Nuruzzaman, a remarkably capable individual, stands as a successful entrepreneur and currently serves as the Chief Officer at Open IT Institute. His adept management extends to Open IT Institute, where he oversees operations with precision and dedication."
+        dis: "MD. Nuruzzaman, a remarkably capable individual, stands as a successful entrepreneur and currently serves as the Chief Officer at Open IT Institute. His adept management extends to Open IT Institute, where he oversees operations with precision and dedication."
     },
     {
         name: "Md. Moniruzzaman",
@@ -28,7 +28,10 @@ const AboutUs = () => {
             {/* Mission & Vision Section */}
             <div className="text-center mb-10">
                 <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">About Us</h1>
-                <p className="text-gray-600 mt-2">Learn more about our mission, vision, and team.</p>
+                <p className="text-gray-600 mt-2">Learn more about our mission, vision, and team.</p> <br />
+                <p>Conventional team building exercises are conducted outdoors and off-site. This is a significant investment of time and money so its worth asking if they deliver the expected results.
+                    If the idea is to enjoy a day of activity and share some laughs, just about any team-building activities will hit the mark.
+                    If you want team members(even the shy ones) to really speak their mind, empathize with each other and build genuine connectedness, you might want to try working with a certified LSP Facilitator.</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 text-center">

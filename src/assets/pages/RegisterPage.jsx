@@ -3,17 +3,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 import Loading from "../components/Loading";
-import '../layouts/Styles/btn.css'
+import '../layouts/Styles/btn.css';
 
 const RegisterPage = () => {
   const { id } = useParams();
-  const {user} = useContext(AuthContext)
-  const email = user.email;
-  console.log(email)
+  const { user } = useContext(AuthContext);
+  const email = user?.email || "";
   const navigate = useNavigate();
   const [marathon, setMarathon] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // ✅ লোডিং স্টেট
   const [formData, setFormData] = useState({
-    email: email , // Replace this with logged-in user's email
+    email: email,
     firstName: "",
     lastName: "",
     contactNumber: "",
@@ -36,12 +36,13 @@ const RegisterPage = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // ✅ লোডিং শুরু
 
-    // Validate email
     try {
-        const emailCheckResponse = await fetch(
-            `https://asserment-eleven-server.vercel.app/applications/check-email?email=${formData.email}&marathonId=${id}`
-          );
+      // Validate email
+      const emailCheckResponse = await fetch(
+        `https://asserment-eleven-server.vercel.app/applications/check-email?email=${formData.email}&marathonId=${id}`
+      );
       const emailCheckResult = await emailCheckResponse.json();
 
       if (emailCheckResult.exists) {
@@ -50,6 +51,7 @@ const RegisterPage = () => {
           text: "You have already registered for this marathon!",
           icon: "error",
         });
+        setIsLoading(false); // ✅ লোডিং বন্ধ
         return;
       }
 
@@ -61,11 +63,14 @@ const RegisterPage = () => {
         date: new Date(),
       };
 
-      const response = await fetch("https://asserment-eleven-server.vercel.app/applications", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(registrationData),
-      });
+      const response = await fetch(
+        "https://asserment-eleven-server.vercel.app/applications",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(registrationData),
+        }
+      );
 
       if (response.ok) {
         Swal.fire({
@@ -89,10 +94,12 @@ const RegisterPage = () => {
         text: "An error occurred. Please try again.",
         icon: "error",
       });
+    } finally {
+      setIsLoading(false); // ✅ লোডিং বন্ধ
     }
   };
 
-  if (!marathon) return <Loading></Loading>;
+  if (!marathon) return <Loading />;
 
   return (
     <div className="container mx-auto p-6">
@@ -102,7 +109,9 @@ const RegisterPage = () => {
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Email
+          </label>
           <input
             type="text"
             name="email"
@@ -172,9 +181,36 @@ const RegisterPage = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className=" buttons"
+          className="buttons flex justify-center items-center"
+          disabled={isLoading} // ✅ লোডিং হলে বাটন ডিজেবল
         >
-          Register
+          {isLoading ? (
+            <span className="flex items-center">
+              <svg
+                className="animate-spin h-5 w-5 mr-2 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v8H4z"
+                ></path>
+              </svg>
+              Registering...
+            </span>
+          ) : (
+            "Register"
+          )}
         </button>
       </form>
     </div>

@@ -10,7 +10,7 @@ import AuthProviders from './assets/Provider/AuthProvider';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div>
+    <div className='font-poppins'>
       <AuthProviders>
         <RouterProvider router={Router} />
       </AuthProviders>
