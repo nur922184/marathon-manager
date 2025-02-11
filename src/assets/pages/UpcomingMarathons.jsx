@@ -25,7 +25,7 @@ const UpcomingMarathons = () => {
                             <img
                                 src={marathon.image}
                                 alt={marathon.title}
-                                className="w-full"
+                                className="w-100% h-64 rounded-lg"
                             />
                             <div className="p-4 flex-1 flex flex-col">
                                 <h3 className="text-lg font-bold">{marathon.title}</h3>

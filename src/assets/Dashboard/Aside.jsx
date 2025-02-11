@@ -14,7 +14,7 @@ const Aside = () => {
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
         {isSidebarOpen ? (
-          <FaRegWindowClose className="text-white" size={24} />
+          <FaRegWindowClose className="text-red-500" size={24} />
         ) : (
           <AiOutlineProfile size={24} />
         )}
@@ -52,6 +52,20 @@ const Aside = () => {
             My Apply List
           </NavLink>
         </nav>
+        <hr className="mt-2 mb-3" />
+
+        <NavLink className={({ isActive }) =>
+          isActive ? "p-3 bg-gray-700" : "p-3 hover:bg-gray-700"
+        } to='/'>Home</NavLink>
+        <NavLink className={({ isActive }) =>
+          isActive ? "p-3 bg-gray-700" : "p-3 hover:bg-gray-700"
+        } to='/marathons'>Marathons</NavLink>
+        <NavLink className={({ isActive }) =>
+          isActive ? "p-3 bg-gray-700" : "p-3 hover:bg-gray-700"
+        } to='/about'>About</NavLink>
+        <NavLink className={({ isActive }) =>
+          isActive ? "p-3 bg-gray-700" : "p-3 hover:bg-gray-700"
+        } to='/contact'>Contact</NavLink>
       </aside>
     </div>
   );

@@ -27,10 +27,6 @@ const Router = createBrowserRouter([
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: "*",
-        element: <ErrorPage></ErrorPage>,
-      },
-      {
         path: "",
         element: <Home></Home>,
       },
@@ -75,76 +71,34 @@ const Router = createBrowserRouter([
         path: "/update-profile",
         element: <PrivatRoute><UpdateProfile></UpdateProfile></PrivatRoute>,
       },
-      {
-        path: "/dashboard",
-        element: <PrivatRoute><DashboardLayout></DashboardLayout></PrivatRoute>,
-        children: [
-          {
-            path: "/dashboard",
-            element: <PrivatRoute><AddMarathon></AddMarathon></PrivatRoute>,
-          },
-          {
-            path: "/dashboard/add-marathon",
-            element: <PrivatRoute> <AddMarathon></AddMarathon></PrivatRoute>,
-          },
-          {
-            path: "/dashboard/my-marathon-list",
-            element: <PrivatRoute> <MyMarathonList></MyMarathonList></PrivatRoute>,
-          },
-          {
-            path: "/dashboard/my-apply-list",
-            element: <PrivatRoute> <MyApplyList></MyApplyList></PrivatRoute>,
-          },
-        ]
-      },
-      // {
-      //   path: "/dashboard",
-      //   element: <Dashboard></Dashboard>,
-      // },
-      //       {
-      //         path: "/donation-campaigns/:id",
-      //         element: <PrivatRoute>
-      //           <DonationDetails></DonationDetails>
-      //         </PrivatRoute>,
-      //       },
-      //       {
-      //         path: "profile",
-      //         element: <PrivatRoute>
-      //           <ProfilePage></ProfilePage>
-      //         </PrivatRoute>,
-      //       },
-      //       {
-      //         path: "update-profile",
-      //         element: <PrivatRoute>
-      //           <UpdateProfile></UpdateProfile>
-      //         </PrivatRoute>,
-      //       },
-      //       {
-      //         path: "/dashboard",
-      //         element: 
-      //         <Dashboard></Dashboard>
-
-      //       },
-      //       {
-      //         path: "/help",
-      //         element: <HowToHelp></HowToHelp>,
-      //       },
-
-
     ]
   },
-  //   {
-  //     path: "/login",
-  //     element: <Login></Login>,
-  //   },
-  //   {
-  //     path: "/register",
-  //     element: <Register></Register>,
-  //   },
-  //   {
-  //     path: "*",
-  //     element: <Error></Error>,
-  //   },
+  {
+    path: "/dashboard",
+    element: <PrivatRoute><DashboardLayout></DashboardLayout></PrivatRoute>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <PrivatRoute><AddMarathon></AddMarathon></PrivatRoute>,
+      },
+      {
+        path: "/dashboard/add-marathon",
+        element: <PrivatRoute> <AddMarathon></AddMarathon></PrivatRoute>,
+      },
+      {
+        path: "/dashboard/my-marathon-list",
+        element: <PrivatRoute> <MyMarathonList></MyMarathonList></PrivatRoute>,
+      },
+      {
+        path: "/dashboard/my-apply-list",
+        element: <PrivatRoute> <MyApplyList></MyApplyList></PrivatRoute>,
+      },
+    ]
+  },
+  {
+    path: "*",
+    element: <ErrorPage></ErrorPage>,
+  },
 
 ]);
 

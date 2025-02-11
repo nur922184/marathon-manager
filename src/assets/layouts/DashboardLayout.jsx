@@ -3,7 +3,7 @@ import Aside from '../Dashboard/Aside';
 import { Outlet } from 'react-router-dom';
 const DashboardLayout = () => {
     return (
-        <div className='grid md:grid-cols-12 border'>
+        <div className='grid md:grid-cols-12 border dark:bg-gray-900 dark:text-white'>
             <aside className='col-span-3 border'>
              <Aside></Aside>
             </aside>
