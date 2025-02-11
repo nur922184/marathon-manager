@@ -5,6 +5,7 @@ export const AuthContext = createContext()
 import { toast, } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -51,16 +52,7 @@ const AuthProviders = ({ children }) => {
       };
     const continueToGoogle = () => {
         setLoding(true); 
-        signInWithPopup(auth, Porvider)
-            .then((result) => {
-                const user = result.user;
-                setUser(user); 
-                navigate("/"); 
-                toast.success("Successfully logged in with Google!", {
-                    position: "top-center",
-                    autoClose: 3000,
-                });
-            })
+       return signInWithPopup(auth, Porvider)
     };
 
     const Login = (email, password) => {

@@ -5,9 +5,11 @@ import { AuthContext } from '../Provider/AuthProvider';
 import bg from '../Images/login.jpg'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Google from '../components/Google';
+
 
 const Login = () => {
-    const { setUser, Login, continueToGoogle, ForgotPassword } = useContext(AuthContext)
+    const { setUser, Login, ForgotPassword } = useContext(AuthContext)
     const [error, setError] = useState({})
     const [show, setShow] = useState(false)
     const location = useLocation();
@@ -117,9 +119,7 @@ const Login = () => {
                             <button className="btn btn-outline dark:text-yellow-50">Login</button>
                         </div>
                     </form>
-                    <button onClick={continueToGoogle} className="btn">
-                        <FaGoogle></FaGoogle> Login with Google
-                    </button>
+                    <Google></Google>
                     <p className='text-center'> Don t Have An Account ? <NavLink to="/register" className='text-blue-700 font-semibold link-hover dark:text-blue-400 '>Register</NavLink></p>
                 </div>
             </div>

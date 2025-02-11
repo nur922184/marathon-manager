@@ -8,7 +8,7 @@ const Contact = () => {
 
       {/* Contact Details Section */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg shadow">
+        <div className="flex items-center space-x-4 p-4 bg-gray-100 dark:bg-white/5 dark:text-yellow-50 rounded-lg shadow">
           <FaPhoneAlt className="text-blue-600 text-3xl" />
           <div>
             <h2 className="text-lg font-semibold">Phone</h2>
@@ -16,7 +16,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg shadow">
+        <div className="flex items-center space-x-4 p-4 bg-gray-100 dark:bg-white/5 dark:text-yellow-50  rounded-lg shadow">
           <FaEnvelope className="text-red-600 text-3xl" />
           <div>
             <h2 className="text-lg font-semibold">Email</h2>
@@ -24,7 +24,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg shadow">
+        <div className="flex items-center space-x-4 p-4 bg-gray-100 dark:bg-white/5 dark:text-yellow-50  rounded-lg shadow">
           <FaMapMarkerAlt className="text-green-600 text-3xl" />
           <div>
             <h2 className="text-lg font-semibold">Location</h2>
@@ -34,15 +34,15 @@ const Contact = () => {
       </div>
 
       {/* Contact Form */}
-      <div className="mt-10 bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+      <div className="mt-10 bg-white dark:bg-white/5 dark:text-yellow-50  p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold mb-4">Send us a Message</h2>
         <form>
           <div className="mb-4">
-            <label className="block font-medium">Your Name</label>
+            <label className="block font-medium ">Your Name</label>
             <input
               type="text"
               placeholder="Enter your name"
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border rounded-lg dark:bg-white/5 dark:text-yellow-50 "
             />
           </div>
 
@@ -51,7 +51,7 @@ const Contact = () => {
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border rounded-lg dark:bg-white/5 dark:text-yellow-50 "
             />
           </div>
 
@@ -60,7 +60,7 @@ const Contact = () => {
             <textarea
               rows="4"
               placeholder="Type your message..."
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border rounded-lg dark:bg-white/5 dark:text-yellow-50 "
             ></textarea>
           </div>
 
