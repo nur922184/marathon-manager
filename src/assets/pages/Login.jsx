@@ -97,7 +97,7 @@ const Login = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button
-                                className="btn btn-outline dark:text-yellow-50 flex items-center justify-center"
+                                className="btn btn-outline dark:text-yellow-50 bg-white/5 backdrop-blur-lg flex items-center justify-center"
                                 disabled={loading} // Disable button when loading
                             >
                                 {loading ? (
@@ -109,7 +109,7 @@ const Login = () => {
                         </div>
                     </form>
                     <Google />
-                    <p className='text-center'> Don't Have An Account? <NavLink to="/register" className='text-blue-700 font-semibold link-hover dark:text-blue-400'>Register</NavLink></p>
+                    <p className='text-center mt-3'> Don't Have An Account? <NavLink to="/register" className='text-blue-700 font-semibold link-hover dark:text-blue-400'>Register</NavLink></p>
                 </div>
             </div>
             <ToastContainer />

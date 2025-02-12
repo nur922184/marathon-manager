@@ -13,10 +13,9 @@ const UpcomingMarathons = () => {
 
     return (
         <section className="bg-gray-100 dark:bg-gray-800 py-12">
-            <div className="container mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-6">Upcoming Marathons</h2>
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6">Upcoming Marathons</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* Dynamic Marathon Cards */}
                     {marathons.map((marathon) => (
                         <div
                             key={marathon._id}
@@ -25,12 +24,12 @@ const UpcomingMarathons = () => {
                             <img
                                 src={marathon.image}
                                 alt={marathon.title}
-                                className="w-100% h-64 rounded-lg"
+                                className="w-full h-48 sm:h-64 object-cover rounded-t-lg"
                             />
                             <div className="p-4 flex-1 flex flex-col">
-                                <h3 className="text-lg font-bold">{marathon.title}</h3>
-                                <p className="text-gray-600">Location: {marathon.location}</p>
-                                <p className="text-gray-600">Date: {new Date(marathon.startDate).toLocaleDateString()}</p>
+                                <h3 className="text-lg sm:text-xl font-bold mb-2">{marathon.title}</h3>
+                                <p className="text-gray-600 mb-1">📍 Location: {marathon.location}</p>
+                                <p className="text-gray-600">📅 Date: {new Date(marathon.startDate).toLocaleDateString()}</p>
                                 <div className="mt-auto">
                                     <button
                                         class="font-sans flex justify-center gap-2 items-center mx-auto shadow-xl text-gray-50 bg-orange-400 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-1 overflow-hidden border-2 rounded-2xl group mt-7"
@@ -48,13 +47,11 @@ const UpcomingMarathons = () => {
                                             ></path>
                                         </svg>
                                     </button>
-                                    
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-
             </div>
         </section>
     );

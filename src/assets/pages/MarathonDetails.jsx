@@ -108,7 +108,7 @@ const MarathonDetails = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 19"
-            class="w-8 h-8 justify-end bg-gray-50 group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+            className="w-8 h-8 justify-end bg-gray-50 group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
           >
             <path
               class="fill-gray-800 group-hover:fill-gray-800"

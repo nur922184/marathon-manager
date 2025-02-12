@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import footer from '../Images/logo/marathon-logo2.png'
 
 const Footer = () => {
   return (
@@ -8,12 +9,15 @@ const Footer = () => {
         {/* Top Section */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-4">
           {/* Logo and Description */}
-          <div className="mb-4 md:mb-0">
-            <h2 className="text-xl font-bold text-white">MarathonManager</h2>
-            <p className="mt-2 text-sm">
-              Your ultimate platform to organize and participate in marathon events. 
-              Manage, explore, and join events seamlessly!
-            </p>
+          <div className="mb-4 md:mb-0 flex items-center">
+            <img className="w-36" src={footer} alt="" />
+            <div>
+              <h2 className="text-xl font-bold text-white">MarathonManager</h2>
+              <p className="mt-2 text-sm">
+                Your ultimate platform to organize and participate in marathon events.
+                Manage, explore, and join events seamlessly!
+              </p>
+            </div>
           </div>
 
           {/* Useful Links */}
