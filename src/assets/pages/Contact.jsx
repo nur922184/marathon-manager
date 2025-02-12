@@ -1,7 +1,18 @@
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const Contact = () => {
+  const submitnow = (e)=>{
+    e.preventDefault();
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Contact Us</h1>
@@ -37,13 +48,14 @@ const Contact = () => {
         {/* Contact Form */}
         <div className="mt-10 bg-white dark:bg-white/5 dark:text-yellow-50  p-6 rounded-lg shadow-lg w-[65%] mx-auto">
           <h2 className="text-2xl font-semibold mb-4">Send us a Message</h2>
-          <form>
+          <form onSubmit={submitnow}>
             <div className="mb-4">
               <label className="block font-medium ">Your Name</label>
               <input
                 type="text"
                 placeholder="Enter your name"
                 className="w-full p-2 border rounded-lg dark:bg-white/5 dark:text-yellow-50 "
+                required
               />
             </div>
 
@@ -52,6 +64,7 @@ const Contact = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
+                required
                 className="w-full p-2 border rounded-lg dark:bg-white/5 dark:text-yellow-50 "
               />
             </div>
@@ -60,6 +73,7 @@ const Contact = () => {
               <label className="block font-medium">Message</label>
               <textarea
                 rows="4"
+                required
                 placeholder="Type your message..."
                 className="w-full p-2 border rounded-lg dark:bg-white/5 dark:text-yellow-50 "
               ></textarea>

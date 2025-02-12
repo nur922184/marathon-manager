@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const UpcomingMarathons = () => {
     const [marathons, setMarathons] = useState([]);
+    const [selectedMarathon, setSelectedMarathon] = useState(null);
 
     useEffect(() => {
         // Fetch data from the API
@@ -10,6 +11,9 @@ const UpcomingMarathons = () => {
             .then((data) => setMarathons(data))
             .catch((error) => console.error("Error fetching marathons:", error));
     }, []);
+
+    const openModal = (marathon) => setSelectedMarathon(marathon);
+    const closeModal = () => setSelectedMarathon(null);
 
     return (
         <section className="bg-gray-100 dark:bg-gray-800 py-12">
@@ -34,6 +38,7 @@ const UpcomingMarathons = () => {
                                     <button
                                         class="font-sans flex justify-center gap-2 items-center mx-auto shadow-xl text-gray-50 bg-orange-400 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-1 overflow-hidden border-2 rounded-2xl group mt-7"
                                         type="submit"
+                                        onClick={() => openModal(marathon)}
                                     >
                                         Learn More
                                         <svg
@@ -52,6 +57,35 @@ const UpcomingMarathons = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* Modal */}
+                {selectedMarathon && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 w-full max-w-lg relative">
+                            <button
+                                className="absolute top-3 right-3 text-red-600 hover:text-gray-900 dark:hover:text-gray-200"
+                                onClick={closeModal}
+                            >
+                                ✕
+                            </button>
+                            <h2 className="text-2xl font-bold mb-4">{selectedMarathon.title}</h2>
+                            <img
+                                src={selectedMarathon.image}
+                                alt={selectedMarathon.title}
+                                className="w-full h-64 object-cover rounded-lg mb-4"
+                            />
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                                📍 <strong>Location:</strong> {selectedMarathon.location}
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                                📅 <strong>Date:</strong> {new Date(selectedMarathon.startDate).toLocaleDateString()}
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300">
+                                📝 <strong>Description:</strong> {selectedMarathon.description || "No description available."}
+                            </p>
+                        </div>
+                    </div>
+                )}
             </div>
         </section>
     );
